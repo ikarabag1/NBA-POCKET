@@ -19,7 +19,8 @@ node, express, axios
 # WIREFRAMES
 ![WireFraming](wireframes/index.jpg)
 ![WireFraming](wireframes/Home.jpg)
-![WireFraming](wireframes/Favorites.jpg)
+![WireFraming](wireframes/favorites-player.jpg)
+![WireFraming](wireframes/favorites-teams.jpg)
 
 # RESTful ROUTES
 ![WireFraming](wireframes/RESTful-Routes.jpg)
