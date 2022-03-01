@@ -17,15 +17,15 @@ node, express, axios
 * I would like to display NBA player and team stats.
 
 # WIREFRAMES
-wireframes/index.jpg
-wireframes/Home.jpg
-wireframes/Favorites.jpg
+![WireFraming](wireframes/index.jpg)
+![WireFraming](wireframes/Home.jpg)
+![WireFraming](wireframes/Favorites.jpg)
 
 # RESTful ROUTES
-wireframes/RESTful-Routes.jpg
+![WireFraming](wireframes/RESTful-Routes.jpg)
 
 # ERD
-wireframes/ERD.png
+![WireFraming](wireframes/ERD.png)
 
 # MVP
 * login / sign up route page getting rendered
