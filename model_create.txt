@@ -1,9 +1,8 @@
 **user model
-
 sequelize model:create --name user --attributes email:string,password:string,username:string
 
 **player model
-sequelize model:create --name player --attributes firstname:string,lastname:string,age:number,height:number,weight:number
+sequelize model:create --name player --attributes firstname:string,lastname:string,age:integer,height:integer,weight:integer
 
 **join table
 sequelize model:create --name user_players --attributes userId:integer,playerId:integer
