@@ -4,5 +4,5 @@ sequelize model:create --name user --attributes email:string,password:string,use
 **player model
 sequelize model:create --name player --attributes firstname:string,lastname:string,age:integer,height:integer,weight:integer
 
-**join table
+**join table M:M
 sequelize model:create --name user_players --attributes userId:integer,playerId:integer
