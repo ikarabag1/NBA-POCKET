@@ -5,7 +5,7 @@ require('dotenv').config() //allows us to access env vars
 const cookieParser = require('cookie-parser')
 const cryptoJS = require('crypto-js')
 const db = require('./models/index.js')
-
+const axios = require('axios')
 const methodOverride = require("method-override");
 
 
@@ -33,26 +33,29 @@ app.use( async (req, res, next) => {
     next() //move on to next middleware -- would only move if this next invoked
 })
 
-
 // CONTROLLERS 
 // USERS ROUTES
 app.use('/users', require('./controllers/users.js'))
 
 
-// ROUTES
-// HOME VIEW // to render the form created in new.ejs in views/users
+// EXPRESS ROUTES
+// HOME VIEW --GET // to render the form created in new.ejs in views/users
 app.get('/', (req, res) => {
     // res.send('HULLO???') //to check on browser if it is working lsitening
     res.render('home')
 })
 
+
+// ERROR VIEW --GET
 app.get("*", (req, res) => {
     res.render("main/404");
 });
 
 // check for an env PORT, otherwise use 8000
 const PORT = process.env.PORT || 8000
+// callback function
 app.listen(PORT, ()=> {
+    // to see if server is running fine
     console.log(`Auth app running on ${PORT}`)
 })
 

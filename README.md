@@ -4,7 +4,7 @@
 Now NBA players info are in your pocket to track and to favourite the players you pick.
 
 # API
-https://rapidapi.com/api-sports/api/api-basketball/
+https://rapidapi.com/api-sports/api/api-nba
 API KEY in .env
 
 # TECH WILL BE USED
