@@ -1,12 +1,12 @@
 <div class="container">
-    <!-- <img src="<%= src %>" /> -->
-    <p>First Name: <%= firstname%> </p>
-    <p>Last Name: <%= lastname%> </p>
+   
+    <p>First Name: <%= firstName%> </p>
+    <p>Last Name: <%= lastName%> </p>
     <p>Age: <%= age%> </p>
     <p>Height: <%= height%> </p>
     <p>Weight: <%= weight%> </p>
-    <form method="POST" action="/player/<% playerLastName% %> ?_method=DELETE">
-        <input hidden type="text" name="name" value=" <% playerLastName %>">
-        <button class="button" type="submit">REMOVE</button>
+    <form method="POST" action="/players/<% player.firstName% %> ?_method=DELETE">
+        <input hidden type="text" name="name" value=" <% player.firstName %>">
+        <button class="remove" type="submit">remove</button>
     </form>    
 </div>

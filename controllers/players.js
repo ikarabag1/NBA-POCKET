@@ -16,6 +16,8 @@ const axios = require('axios').default;
 require('dotenv').config() //process.env.SECRET
 // console.log(process.env.RAPID_API_KEY)
 
+
+// GET SINGLE PLAYER
 const options = {
     method: 'GET',
     url: 'https://api-nba-v1.p.rapidapi.com/players/firstName/lebron',
@@ -26,9 +28,33 @@ const options = {
   };
   
   axios.request(options).then(function (response) {
-      console.log(response.data);
+      console.log(response.data.api.players);
   }).catch(function (error) {
       console.error(error);
   });
 
+
+
 module.exports = router
+
+router.get('/nbaplayersapi', (req, res) => {
+
+    const options = {
+        method: 'GET',
+        url: 'https://api-nba-v1.p.rapidapi.com/players/?search=${req.query.search}',
+        headers: {
+          'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
+          'x-rapidapi-key': process.env.RAPID_API_KEY
+        }
+      };
+    //   request to api
+      axios.request(options)
+      .then(function (response) {
+          console.log(response.data.api.players);
+        // home.ejs in views
+          res.render('profile.ejs', {})
+      }).catch(function (error) {
+          console.error(error);
+      });
+    
+    })

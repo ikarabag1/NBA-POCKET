@@ -37,7 +37,7 @@ app.use( async (req, res, next) => {
 // USERS ROUTES
 app.use('/users', require('./controllers/users.js'))
 // PLAYERS ROUTES
-app.use('/players', require('./controllers/players'))
+app.use('/players', require('./controllers/players.js'))
 
 
 // EXPRESS ROUTES
@@ -49,9 +49,10 @@ app.get('/', (req, res) => {
 
 
 // ERROR VIEW --GET
-app.get("*", (req, res) => {
-    res.render("main/404");
-});
+// app.get("*", (req, res) => {
+//     res.render("main/404");
+//     console.log(error)
+// });
 
 // check for an env PORT, otherwise use 8000
 const PORT = process.env.PORT || 8000

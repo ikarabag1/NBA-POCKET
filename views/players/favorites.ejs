@@ -1,13 +1,18 @@
-<h2>My Favorites</h2>
+<div class="container">
 
-<p>All <%= player.length %> of my favourite NBA Players!</p>
+<h1>All <%= player.length %> of my favourite NBA Players!</h1>
 
-<% player.forEach(function(player) => { %> 
+<% player.forEach(function(player) { %> 
     <div class="well">
-        <h3>
-            <a href="/player/<%= player.lastname %>">
-            <%= player.lastname %> 
+        <h2>
+            <a href="/players/<%= player.firstName %>">
+            <%= player.firstName %> 
             </a>
-        </h3>
+            <form method="POST" action="/players/<%= player.firstName% %> ?_method=DELETE">
+                <input hidden type="text" name="name" value=" <%=player.firstName %> ">
+                <button class="remove" type="submit">remove</button>
+            </form>
+        </h2>
     </div>
 <% }); %>
+</div>

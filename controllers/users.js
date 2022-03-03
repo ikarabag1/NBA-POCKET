@@ -47,7 +47,7 @@ router.get('/login', (req, res) => {
     res.render('users/login.ejs', {error: null})
 })
 
-// POST ROUTE
+// SIGN UP --POST ROUTE
 // what should happen in login page
 router.post('/login', async (req, res) => {
 // find them
@@ -71,6 +71,7 @@ const user = await db.user.findOne({
         res.redirect('/')
     }
 })
+
 
 // LOGOUT ROUTE
 router.get('/logout', (req, res) => {
