@@ -1,11 +1,11 @@
-<h2>My Fvorites</h2>
+<h2>My Favorites</h2>
 
-<p>All <%=  player.length%> of my favourite NBA Players!</p>
+<p>All <%= player.length %> of my favourite NBA Players!</p>
 
 <% player.forEach(function(player) => { %> 
     <div class="well">
         <h3>
-            <a href="/player/<%= player.lastname %> ">
+            <a href="/player/<%= player.lastname %>">
             <%= player.lastname %> 
             </a>
         </h3>
