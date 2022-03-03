@@ -1,5 +1,7 @@
 const express = require('express') //to import express
-const { append } = require('express/lib/response')
+const {
+    append
+} = require('express/lib/response')
 const router = express.Router() // to import routers in controllers
 const db = require('../models') //to import models
 const bcrypt = require('bcrypt') //to import hashing passwords pg
@@ -17,44 +19,59 @@ require('dotenv').config() //process.env.SECRET
 // console.log(process.env.RAPID_API_KEY)
 
 
-// GET SINGLE PLAYER
-const options = {
-    method: 'GET',
-    url: 'https://api-nba-v1.p.rapidapi.com/players/firstName/lebron',
-    headers: {
-      'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
-      'x-rapidapi-key': process.env.RAPID_API_KEY
+// // GET SINGLE PLAYER
+// const options = {
+//     method: 'GET',
+//     url: 'https://api-nba-v1.p.rapidapi.com/players/firstName/lebron',
+//     headers: {
+//       'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
+//       'x-rapidapi-key': process.env.RAPID_API_KEY
+//     }
+//   };
+
+//   axios.request(options).then(function (response) {
+//       console.log(response.data.api.players);
+//   }).catch(function (error) {
+//       console.error(error);
+//   });
+
+
+// //   http://nbaplayersapi?search=lebron
+
+// SEARCH on home
+router.get('/nbaplayersapi', (req, res) => {
+    // use the request body -- req.body
+    console.log(req.query)
+    if (req.query.search) {
+        console.log('insideifcheck')
+        const options = {
+            method: 'GET',
+            url: `https://api-nba-v1.p.rapidapi.com/players/firstName/${req.query.search}`,
+            headers: {
+                'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
+                'x-rapidapi-key': process.env.RAPID_API_KEY
+            }
+        };
+        console.log(options)
+        //   request to api
+        axios.request(options)
+            .then(function (response) {
+                console.log(response.data.api.players);
+                const playerData = response.data.api.players;
+                const context = {player: playerData}
+                // home.ejs in views
+                res.render('users/profile.ejs', {playerData})
+            }).catch(function (error) {
+                console.error(error);
+            });
+
+    } else {
+        console.log('insideelse')
+        res.render('users/profile.ejs')
     }
-  };
-  
-  axios.request(options).then(function (response) {
-      console.log(response.data.api.players);
-  }).catch(function (error) {
-      console.error(error);
-  });
 
 
+    // console.log(req.body, options)
+})
 
 module.exports = router
-
-router.get('/nbaplayersapi', (req, res) => {
-
-    const options = {
-        method: 'GET',
-        url: 'https://api-nba-v1.p.rapidapi.com/players/?search=${req.query.search}',
-        headers: {
-          'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
-          'x-rapidapi-key': process.env.RAPID_API_KEY
-        }
-      };
-    //   request to api
-      axios.request(options)
-      .then(function (response) {
-          console.log(response.data.api.players);
-        // home.ejs in views
-          res.render('profile.ejs', {})
-      }).catch(function (error) {
-          console.error(error);
-      });
-    
-    })
