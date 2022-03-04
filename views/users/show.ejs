@@ -1,12 +1,27 @@
-<div class="container">
-   
-    <p>First Name: <%= firstName%> </p>
-    <p>Last Name: <%= lastName%> </p>
-    <p>Age: <%= age%> </p>
-    <p>Height: <%= height%> </p>
-    <p>Weight: <%= weight%> </p>
-    <form method="POST" action="/players/<% player.firstName% %> ?_method=DELETE">
-        <input hidden type="text" name="name" value=" <% player.firstName %>">
-        <button class="remove" type="submit">remove</button>
-    </form>    
+
+
+<div>
+    <% playerData.forEach(element => { %>
+        <p>Name: <%= element.firstName%> <%= element.lastName%> </p>
+        <p>Age: <%= element.dateOfBirth%> </p>
+        <!-- <p>Years Pro: <%= element.yearsPro%> </p> -->
+        <!-- <p>start NBA: <%= element.startNba%> </p> -->
+        <p>Height <%= element.heightInMeters%> </p>
+        <p>Weight <%= element.weightInKilograms%> </p>
+        <!-- <p>Leauges: <%= element.leagues%> </p> --> 
+
+        <form method="POST" action="/players/nbaplayersapi">
+            <input hidden type="text" name="firstName" value=" <% element.firstName %>">
+            <input hidden type="text" name="lastName" value=" <% element.lastName %>">
+            <input hidden type="text" name="dateOfBirth" value=" <% element.dateOfBirth %>">
+            <!-- <input hidden type="text" name="yearsPro" value=" <% element.yearsPro %>">
+            <input hidden type="text" name="startNba" value=" <% element.startNba %>"> -->
+            <input hidden type="text" name="heightInMeters" value=" <% element.heightInMeters %>">
+            <input hidden type="text" name="weightInKilograms" value=" <% element.weightInKilograms %>">
+            <!-- <input hidden type="text" name="leagues" value=" <% element.leagues %>"> -->
+            
+            <button class="delete" type="submit">remove from list</button>
+        </form>  
+    <% }) %>    
+
 </div>

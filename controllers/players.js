@@ -7,7 +7,9 @@ const db = require('../models') //to import models
 const bcrypt = require('bcrypt') //to import hashing passwords pg
 const cryptojs = require('crypto-js')
 const res = require('express/lib/response')
-const { RowDescriptionMessage } = require('pg-protocol/dist/messages')
+const {
+    RowDescriptionMessage
+} = require('pg-protocol/dist/messages')
 
 
 const axios = require('axios').default;
@@ -59,43 +61,53 @@ router.get('/nbaplayersapi', (req, res) => {
             .then(function (response) {
                 // console.log(response.data.api.players);
                 const playerData = response.data.api.players;
-                const context = {player: playerData}
+                const context = {
+                    player: playerData
+                }
                 // console.log(playerData)
                 // home.ejs in views
-                res.render('users/display.ejs', {playerData})
+                res.render('users/display.ejs', {
+                    playerData
+                })
             }).catch(function (error) {
                 console.error(error);
             });
     } else {
         // console.log('insideelse')
-        res.render('users/display.ejs', {playerData:null})
+        res.render('users/display.ejs', {
+            playerData: null
+        })
     }
 })
 
-// POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
-router.post('/nbaplayersapi', async(req, res) => {
-    try{
-        const user = await db.user.findOne({
-            where: {
-                id: res.locals.user.id
-            }
-        })
-        const [player, playerCreated] = await user.createPlayer({
-            where: {
-                firstname: req.body.firstName,
-                lastname: req.body.lastName,
-                age: req.body.dateOfBirth,
-                height: req.body.heightInMeters,
-                weight: req.body.weightInKilograms
-            },
-        })
-     
+    // POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
+    router.post('/nbaplayersapi', async (req, res) => {
+        try {
+            const user = await db.user.findOne({
+                where: {
+                    id: res.locals.user.id
+                }
+            })
+            console.log(user)
+            const [player, playerCreated] = await user.createPlayer({
+                where: {
+                    firstname: req.body.firstName,
+                    lastname: req.body.lastName,
+                    age: req.body.dateOfBirth,
+                    height: req.body.heightInMeters,
+                    weight: req.body.weightInKilograms
+                }
+               
+            })
+
             console.log('The new Favorite player is')
-            res.redirect('users/show.ejs', {playerData})
-        
-    } catch (err) {
-        res.status(400).render('main/404.ejs')
+            res.redirect('users/favorites.ejs')
+
+        } catch (err) {
+            res.status(400).render('main/404.ejs')
         }
-})
+    })
+
+
 
 module.exports = router

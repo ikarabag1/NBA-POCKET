@@ -17,6 +17,7 @@ app.use(cookieParser()) //gives us access to req.cookies
 app.use(express.urlencoded({extended: false})) //body parser (to make req.bosy work) --apply to every controoller routes so always put it in indexs.js
 app.use(methodOverride("_method"));
 
+
 // CUSTOM COOKIE MIDDLEWARE
 app.use( async (req, res, next) => {
     // there are situation cant do that so we need to wrap it up
@@ -46,13 +47,6 @@ app.get('/', (req, res) => {
     // res.send('HULLO???') //to check on browser if it is working lsitening
     res.render('home')
 })
-
-
-// ERROR VIEW --GET
-// app.get("*", (req, res) => {
-//     res.render("main/404");
-//     console.log(error)
-// });
 
 // check for an env PORT, otherwise use 8000
 const PORT = process.env.PORT || 8000

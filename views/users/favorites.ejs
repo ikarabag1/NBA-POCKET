@@ -3,13 +3,25 @@
     <h1>All <%= playerData.length %> of my favourite NBA Players!</h1>
 
     <% playerData.forEach(element { %>
+        <p>Name: <%= element.firstName%> <%= element.lastName%> </p>
+        <p>Age: <%= element.dateOfBirth%> </p>
+        <p>Height <%= element.heightInMeters%> </p>
+        <p>Weight <%= element.weightInKilograms%> </p>
+
     <div class="well">
         <h2>
-            <a href="/players/nbaplayersapi<%= element.firstName %>">
-                <%= element.firstName %>
+           
+               
             </a>
-            <form method="POST" action="/players/nbaplayersapi<%= element.firstName% %> ">
-                <input hidden type="text" name="name" value=" <%=player.firstName %>,<% element.lastName %> ">
+            <form method="GET" action="/players/nbaplayersapi">
+
+                <a href="/players/nbaplayersapi<%= element.firstName %><% element.lastName %>">
+
+                <input hidden type="text" name="name" value=" <%=element.firstName %><% element.lastName %> ">
+                <input hidden type="text" name="dateOfBirth" value=" <% element.dateOfBirth %>">
+                <input hidden type="text" name="heightInMeters" value=" <% element.heightInMeters %>">
+                <input hidden type="text" name="weightInKilograms" value=" <% element.weightInKilograms %>">
+
                 <button class="remove" type="submit">remove</button>
             </form>
         </h2>
