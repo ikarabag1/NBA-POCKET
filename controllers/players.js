@@ -7,6 +7,7 @@ const db = require('../models') //to import models
 const bcrypt = require('bcrypt') //to import hashing passwords pg
 const cryptojs = require('crypto-js')
 const res = require('express/lib/response')
+const { RowDescriptionMessage } = require('pg-protocol/dist/messages')
 
 
 const axios = require('axios').default;
@@ -69,6 +70,32 @@ router.get('/nbaplayersapi', (req, res) => {
         // console.log('insideelse')
         res.render('users/display.ejs', {playerData:null})
     }
+})
+
+// POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
+router.post('/nbaplayersapi', async(req, res) => {
+    try{
+        const user = await db.user.findOne({
+            where: {
+                id: res.locals.user.id
+            }
+        })
+        const [player, playerCreated] = await user.createPlayer({
+            where: {
+                firstname: req.body.firstName,
+                lastname: req.body.lastName,
+                age: req.body.dateOfBirth,
+                height: req.body.heightInMeters,
+                weight: req.body.weightInKilograms
+            },
+        })
+     
+            console.log('The new Favorite player is')
+            res.redirect('/users/display')
+        
+    } catch (err) {
+        console.log(err)
+        }
 })
 
 module.exports = router

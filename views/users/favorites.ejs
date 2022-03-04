@@ -1,0 +1,18 @@
+<div class="container">
+
+    <h1>All <%= playerData.length %> of my favourite NBA Players!</h1>
+
+    <% playerData.forEach(element { %>
+    <div class="well">
+        <h2>
+            <a href="/players/nbaplayersapi<%= element.firstName %>">
+                <%= element.firstName %>
+            </a>
+            <form method="POST" action="/players/nbaplayersapi<%= element.firstName% %> ">
+                <input hidden type="text" name="name" value=" <%=player.firstName %>,<% element.lastName %> ">
+                <button class="remove" type="submit">remove</button>
+            </form>
+        </h2>
+    </div>
+    <% }); %>
+</div>
