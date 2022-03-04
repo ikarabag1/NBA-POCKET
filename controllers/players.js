@@ -91,10 +91,10 @@ router.post('/nbaplayersapi', async(req, res) => {
         })
      
             console.log('The new Favorite player is')
-            res.redirect('/users/display')
+            res.redirect('users/show.ejs', {playerData})
         
     } catch (err) {
-        console.log(err)
+        res.status(400).render('main/404.ejs')
         }
 })
 
