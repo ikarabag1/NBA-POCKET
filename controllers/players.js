@@ -41,9 +41,9 @@ require('dotenv').config() //process.env.SECRET
 // SEARCH on home
 router.get('/nbaplayersapi', (req, res) => {
     // use the request body -- req.body
-    console.log(req.query)
+    // console.log(req.query)
     if (req.query.search) {
-        console.log('insideifcheck')
+        // console.log('insideifcheck')
         const options = {
             method: 'GET',
             url: `https://api-nba-v1.p.rapidapi.com/players/firstName/${req.query.search}`,
@@ -56,22 +56,19 @@ router.get('/nbaplayersapi', (req, res) => {
         //   request to api
         axios.request(options)
             .then(function (response) {
-                console.log(response.data.api.players);
+                // console.log(response.data.api.players);
                 const playerData = response.data.api.players;
                 const context = {player: playerData}
+                // console.log(playerData)
                 // home.ejs in views
-                res.render('users/profile.ejs', {playerData})
+                res.render('users/display.ejs', {playerData})
             }).catch(function (error) {
                 console.error(error);
             });
-
     } else {
-        console.log('insideelse')
-        res.render('users/profile.ejs')
+        // console.log('insideelse')
+        res.render('users/display.ejs', {playerData:null})
     }
-
-
-    // console.log(req.body, options)
 })
 
 module.exports = router
