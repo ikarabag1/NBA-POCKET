@@ -7,6 +7,7 @@ const cryptojs = require('crypto-js')
 const res = require('express/lib/response')
 require('dotenv').config()
 
+// CONTROLLERS
 // PROFILE --GET ROUTE
 router.get('/profile', (req, res) => {
     res.render('users/profile.ejs')

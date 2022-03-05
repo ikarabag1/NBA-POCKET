@@ -83,31 +83,29 @@ router.get('/nbaplayersapi', (req, res) => {
     // POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
     
     router.post('/nbaplayersapi', async (req, res) => {
-        try {
-            
-            const user = await db.user.findOne({
-                where: {
-                    id: res.locals.user.id
-                }
-            })
-            
-            const [player, playerCreated] = await db.player.findOrCreate({
-                where: {
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,                 
-                    height: req.body.height,
-                    weight: req.body.weight
-                }
-               
-            })
-            await user.addPlayer(player)
-            console.log('The new Favorite player is')
-            res.redirect('/users/profile/')
+        if (res.locals.user) {
+           try { 
+               const [player, playerCreated] = 
+                await db.player.findOrCreate({
+                    where: {
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname,                 
+                        height: req.body.height,
+                        weight: req.body.weight
+                    }            
+                })
+            await player.addUser(res.locals.user);
+            const localUser = res.locals.user
+            console.log('The new Favorite player is:', player)   
+            res.render('users/favorites.ejs')       
 
         } catch (err) {
             res.status(400).render('main/404.ejs')
             console.log(err)
         }
+    } else {
+        res.redirect("users/display.ejs")
+    }
     })
 
 
