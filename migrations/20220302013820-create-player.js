@@ -14,14 +14,11 @@ module.exports = {
       lastname: {
         type: Sequelize.STRING
       },
-      age: {
-        type: Sequelize.INTEGER
-      },
       height: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       weight: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,

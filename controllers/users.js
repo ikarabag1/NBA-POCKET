@@ -15,6 +15,10 @@ router.get('/profile', (req, res) => {
 router.get('/new', (req, res)=> {
     res.render('users/new.ejs')
 })
+// FAVORITES --POST ROUTE
+router.post('/favorites', (req, res) => {
+    res.render('users/favorites.ejs')
+})
 
 // SIGN UP --POST ROUTE 
 router.post('/', async (req, res)=> { //user is the model name
