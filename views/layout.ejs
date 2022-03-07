@@ -10,12 +10,12 @@
 <body>
     <h1>NBA Pocket</h1>
     <h2>NBA Players Directory</h2>  
-    <h2>Sign up or Login to search NBA players</h2>
     <nav> 
         <ul> 
             <% if (user) { %>
                 <li><a href="/users/profile">Profile</a></li>
                 <li><a href="/users/logout">Logout</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/players/favorites">Favorites</a></li>
             <% } else { %>
             <li><a href="/users/new">Sign Up</a></li>

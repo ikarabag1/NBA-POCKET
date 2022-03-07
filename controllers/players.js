@@ -113,7 +113,7 @@ router.post('/favorites', async (req, res) => {
 })
 
 // DELETE ROUTE AT FAVORITES
-router.delete('/favorites', async (erq, res) => {
+router.delete('/favorites/?_method=DELETE', async (erq, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
@@ -121,13 +121,14 @@ router.delete('/favorites', async (erq, res) => {
                     id: res.locals.user.id
                 }
             })
-            const foundFave = await db.user_players.findOne({
+            const deletedFave = await db.user_players.destroy({
                 where: {
-                    userId: res.locals.user.id,
+                   
                     playerId: req.params.playerId
                 }
             })
-            await user.foundFave.destroy()
+            await userFound.deletedFave.destroy()
+            console.log(deletedFave)
             res.redirect("/players/favorites")
         } catch (err) {
             res.status(400).render('main/404.ejs')

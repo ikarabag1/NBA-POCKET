@@ -16,7 +16,7 @@ const req = require('express/lib/request')
 router.get('/profile', (req, res) => {
     res.render('users/profile.ejs')
 })
-// HOME --GET ROUTE
+// NEW --GET ROUTE
 router.get('/new', (req, res) => {
     res.render('users/new.ejs')
 })
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => { //user is the model name
 })
 
 // EDIT --PUT ROUTE
-router.put('/profile', async (req, res) => {
+router.put('/', async (req, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
