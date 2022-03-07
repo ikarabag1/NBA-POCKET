@@ -41,6 +41,7 @@ app.use('/users', require('./controllers/users.js'))
 app.use('/players', require('./controllers/players.js'))
 
 
+
 // EXPRESS ROUTES
 // HOME VIEW --GET // to render the form created in new.ejs in views/users
 app.get('/', (req, res) => {

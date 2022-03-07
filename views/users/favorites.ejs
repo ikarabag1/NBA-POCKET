@@ -1,27 +1,44 @@
 <div class="container">
+    <h1>All <%= faves.length %> of my favourite NBA Players!</h1>
+    <% faves.forEach(eachFaves => { %>
+    <a href="/users/profile/<%= eachFaves.id %> ">
+        <p>Name: <%= eachFaves.firstName%> <%= eachFaves.lastName%> </p>
+        <p>Height <%= eachFaves.heightInMeters%> </p>
+        <p>Weight <%= eachFaves.weightInKilograms%> </p>
+        <div class="well">
+            <h2>
+                <form method="GET" action="/players/favorites">
+                    <input type="hidden" name="firstname" value=" <%=eachFaves.firstName %>">
+                    <input type="hidden" name="lastname" value="<%= eachFaves.lastName %> ">
+                    <input type="hidden" name="height" value=" <%= eachFaves.heightInMeters %>">
+                    <input type="hidden" name="weight" value=" <%= eachFaves.weightInKilograms %>">
+                </form>
+            </h2>
+        </div>
+        <% }); %>
+</div>
 
-    <h1>All <%= playerData.length %> of my favourite NBA Players!</h1>
 
-    <% playerData.forEach(element { %>
-        <p>Name: <%= element.firstName%> <%= element.lastName%> </p>
-        <p>Height <%= element.heightInMeters%> </p>
-        <p>Weight <%= element.weightInKilograms%> </p>
-
-    <div class="well">
-        <h2>                       
-        
-            <form method="POST" action="/players/nbaplayersapi">
-
-                <!-- <a href="/players/nbaplayersapi<%= element.firstName %> <% element.lastName %>"> -->
-
-                <input  type="hidden" name="firstname" value=" <%=element.firstName %>">
-                <input  type="hidden" name="lastname" value="<%= element.lastName %> ">
-                <input  type="hidden" name="height" value=" <%= element.heightInMeters %>">
-                <input  type="hidden" name="weight" value=" <%= element.weightInKilograms %>">
+<div class="well">
+    <h1>All <%= faves.length %> of my favourite NBA Players!</h1>
+    <% faves.forEach(eachFaves => { %>
+    <a href="/users/profile/<%= eachFaves.id %> ">
+        <p>Name: <%= eachFaves.firstName%> <%= eachFaves.lastName%> </p>
+        <p>Height <%= eachFaves.heightInMeters%> </p>
+        <p>Weight <%= eachFaves.weightInKilograms%> </p>
+        <div>
+            <form method="POST" action="/player/favorites">
+                <input type="hidden" name="firstname" value=" <%=eachFaves.firstName %>">
+                <input type="hidden" name="lastname" value="<%= eachFaves.lastName %> ">
+                <input type="hidden" name="height" value=" <%= eachFaves.heightInMeters %>">
+                <input type="hidden" name="weight" value=" <%= eachFaves.weightInKilograms %>">
 
                 <button class="remove" type="submit">remove</button>
             </form>
-        </h2>
-    </div>
-    <% }); %>
+        </div>
+        <% }); %>
 </div>
+
+<!-- <div class="delete">
+
+</div> -->

@@ -11,6 +11,8 @@ const {
     RowDescriptionMessage
 } = require('pg-protocol/dist/messages')
 
+const methodOverride = require('method-override')
+const req = require('express/lib/request')
 
 const axios = require('axios').default;
 // axios fetches data
@@ -21,27 +23,7 @@ const axios = require('axios').default;
 require('dotenv').config() //process.env.SECRET
 // console.log(process.env.RAPID_API_KEY)
 
-
-// // GET SINGLE PLAYER
-// const options = {
-//     method: 'GET',
-//     url: 'https://api-nba-v1.p.rapidapi.com/players/firstName/lebron',
-//     headers: {
-//       'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
-//       'x-rapidapi-key': process.env.RAPID_API_KEY
-//     }
-//   };
-
-//   axios.request(options).then(function (response) {
-//       console.log(response.data.api.players);
-//   }).catch(function (error) {
-//       console.error(error);
-//   });
-
-
-// //   http://nbaplayersapi?search=lebron
-
-// SEARCH on home
+// SEARCH on profile
 router.get('/nbaplayersapi', (req, res) => {
     // use the request body -- req.body
     // console.log(req.query)
@@ -80,34 +62,79 @@ router.get('/nbaplayersapi', (req, res) => {
     }
 })
 
-    // POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
-    
-    router.post('/nbaplayersapi', async (req, res) => {
-        if (res.locals.user) {
-           try { 
-               const [player, playerCreated] = 
-                await db.player.findOrCreate({
-                    where: {
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname,                 
-                        height: req.body.height,
-                        weight: req.body.weight
-                    }            
-                })
-            await player.addUser(res.locals.user);
-            const localUser = res.locals.user
-            console.log('The new Favorite player is:', player)   
-            res.render('users/favorites.ejs')       
+
+// POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
+router.post('/nbaplayersapi', async (req, res) => {
+    if (res.locals.user) {
+        try {
+            const userFound = await db.user.findOne({
+                where: {
+                    id: res.locals.user.id
+                }
+            })
+            const [player, playerCreated] =
+            await db.player.findOrCreate({
+                where: {
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    height: req.body.height,
+                    weight: req.body.weight
+                }
+            })
+            await userFound.addPlayer(player);
+            console.log('The new Favorite player is:', player)
+            res.redirect("/players/favorites")
 
         } catch (err) {
             res.status(400).render('main/404.ejs')
             console.log(err)
         }
-    } else {
-        res.redirect("users/display.ejs")
     }
-    })
+})
 
+// GET ROUTE to FAVORITES
+router.get('/favorites', async (req, res) => {
+    if (res.locals.user) {
+        try {
+            const userFound = await db.user.findOne({
+                where: {
+                    id: res.locals.user.id
+                }
+            })
+            const faves = await userFound.getPlayers()
+            console.log(faves)
+            res.render('users/favorites.ejs', {
+                faves
+            })
+        } catch (err) {
+            res.status(400).render('main/404.ejs')
+            console.log(err)
+        }
+    }
+})
 
+// DELETE ROUTE from FAVPRITES
+router.delete('/nbaplayersapi', async (erq, res) => {
+    if (res.locals.user) {
+        try {
+            const userFound = await db.user.findOne({
+                where: {
+                    id: res.locals.user.id
+                }
+            })
+            const foundFave = await db.user_players.findOne({
+                where: {
+                    userId: res.locals.user.id,
+                    playerId: req.params.playerId
+                }
+            })
+            await user.foundFave.destroy()
+            res.redirect("/users/favorites")
+        } catch (err) {
+            res.status(400).render('main/404.ejs')
+            console.log(err)
+        }
+    }
+})
 
 module.exports = router
