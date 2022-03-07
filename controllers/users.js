@@ -51,7 +51,7 @@ router.post('/', async (req, res) => { //user is the model name
 
 // EDIT --PUT ROUTE
 router.put('/profile', async (req, res) => {
-        if (res.locals.user) {
+    if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
                 where: {
@@ -61,7 +61,7 @@ router.put('/profile', async (req, res) => {
             const hashedPassword = bcrypt.hashSync(req.body.password, 10) // to hash that password, how many times
             userFound.password = hashedPassword //to get the new password 
             userFound.update({
-                
+
                 password: req.body.password
             })
             await userFound.save();

@@ -62,9 +62,29 @@ router.get('/nbaplayersapi', (req, res) => {
     }
 })
 
+// GET ROUTE TO ADD TO FAVORITES
+router.get('/favorites', async (req, res) => {
+    if (res.locals.user) {
+        try {
+            const userFound = await db.user.findOne({
+                where: {
+                    id: res.locals.user.id
+                }
+            })
+            const faves = await userFound.getPlayers()
+            console.log(faves)
+            res.render('users/favorites.ejs', {
+                faves
+            })
+        } catch (err) {
+            res.status(400).render('main/404.ejs')
+            console.log(err)
+        }
+    }
+})
 
-// POST ROUTE TO FAVORITE PLAYER USER SEARCHED AND SELECTED
-router.post('/nbaplayersapi', async (req, res) => {
+// POST ROUTE TO SHOW FAVORITE PLAYERS
+router.post('/favorites', async (req, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
@@ -92,29 +112,8 @@ router.post('/nbaplayersapi', async (req, res) => {
     }
 })
 
-// GET ROUTE to FAVORITES
-router.get('/favorites', async (req, res) => {
-    if (res.locals.user) {
-        try {
-            const userFound = await db.user.findOne({
-                where: {
-                    id: res.locals.user.id
-                }
-            })
-            const faves = await userFound.getPlayers()
-            console.log(faves)
-            res.render('users/favorites.ejs', {
-                faves
-            })
-        } catch (err) {
-            res.status(400).render('main/404.ejs')
-            console.log(err)
-        }
-    }
-})
-
-// DELETE ROUTE from FAVPRITES
-router.delete('/nbaplayersapi', async (erq, res) => {
+// DELETE ROUTE AT FAVORITES
+router.delete('/favorites', async (erq, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
@@ -129,7 +128,7 @@ router.delete('/nbaplayersapi', async (erq, res) => {
                 }
             })
             await user.foundFave.destroy()
-            res.redirect("/users/favorites")
+            res.redirect("/players/favorites")
         } catch (err) {
             res.status(400).render('main/404.ejs')
             console.log(err)
