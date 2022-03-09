@@ -1,6 +1,16 @@
+<h2>Hello <%= user.email %> </h2>
+
 <form method="GET" action="/players/nbaplayersapi">
     <label for="nbaapi-search">Search</label>
     <input type="text" id="nbaplayersapi-search" value="" placeholder="enter players first name" name="search"/>
     <input type="submit"/>
 </form>
 
+
+<p>
+<form method="POST" action="/users/profile/?_method=PUT">
+    <label for="password">New Password:</label>
+    <input type="password" id="password" placeholder="type your new password" name="password">
+    <button type="submit">Update Password</button>
+</form>
+</p>

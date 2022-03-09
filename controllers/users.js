@@ -31,7 +31,8 @@ router.post('/', async (req, res) => { //user is the model name
     })
     if (!created) {
         console.log('User already exists') //please try to login user already exist
-        // render the login page and send an appropriate error messsage need to do res.render
+        // render the login page and send an appropriate error messsage need to do 
+        res.render('users/login.ejs', {error: 'Looks like you already have an account! Try logging in :)'})
     } else {
         const hashedPassword = bcrypt.hashSync(req.body.password, 10) // to hash that password, how many times
         newUser.password = hashedPassword //to get the password newUser entered
@@ -49,8 +50,17 @@ router.post('/', async (req, res) => { //user is the model name
     }
 })
 
+// LOGIN --GET ROUTE
+// need a login form route
+router.get('/login', (req, res) => {
+    res.render('users/login.ejs', {
+        error: null
+    })
+})
+
+
 // EDIT --PUT ROUTE
-router.put('/', async (req, res) => {
+router.put('/profile', async (req, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
@@ -58,28 +68,22 @@ router.put('/', async (req, res) => {
                     id: res.locals.user.id
                 }
             })
-            const hashedPassword = bcrypt.hashSync(req.body.password, 10) // to hash that password, how many times
-            userFound.password = hashedPassword //to get the new password 
-            userFound.update({
-
+ 
+            await userFound.update({
+                where: {
+                
                 password: req.body.password
+                }
             })
-            await userFound.save();
+            await userFound.save(password);
             console.log(userFound)
+            console.log(req.body)
             res.redirect('/')
         } catch (err) {
             res.status(400).render('main/404.ejs')
             console.log(err)
         }
     }
-})
-
-// LOGIN --GET ROUTE
-// need a login form route
-router.get('/login', (req, res) => {
-    res.render('users/login.ejs', {
-        error: null
-    })
 })
 
 // SIGN UP --POST ROUTE

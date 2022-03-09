@@ -3,6 +3,7 @@ const app = express() //create an express instance
 const ejsLayouts = require('express-ejs-layouts') //import ejs layouts
 require('dotenv').config() //allows us to access env vars
 const cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt') //to import hashing passwords pg
 const cryptoJS = require('crypto-js')
 const db = require('./models/index.js')
 const axios = require('axios')

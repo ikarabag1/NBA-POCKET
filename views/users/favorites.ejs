@@ -1,55 +1,28 @@
-<div class="container">
-    <h3>All <%= faves.length %> of my favourite NBA Players!</h3>
-    <% faves.forEach(faves => { %>
-   
-        <p>Name: <%= faves.firstname%> <%= faves.lastname%> </p>
-        <p>Height <%= faves.height%> </p>
-        <p>Weight <%= faves.weight%> </p>
-        <div class="well">
-            <h4>
-                <form method="GET" action="/players/favorites">
-                    <input type="hidden" name="firstname" value=" <%=faves.firstname %>">
-                    <input type="hidden" name="lastname" value="<%= faves.lastname %> ">
-                    <input type="hidden" name="height" value=" <%= faves.height %>">
-                    <input type="hidden" name="weight" value=" <%= faves.weight %>">
-                </form>
-            </h4>
-        </div>
-        <% }); %>
-</div>
-
-
 <div class="well">
-    <h3>All <%= faves.length %> of my favourite NBA Players!</h3>
-    <% faves.forEach(faves => { %>
    
+    <h3>All <%= faves.length %> of my favourite NBA Players!</h3>
+    
+    <% faves.forEach(faves => { %>  
         <p>Name: <%= faves.firstname%> <%= faves.lastname%> </p>
         <p>Height <%= faves.height%> </p>
         <p>Weight <%= faves.weight%> </p>
-        <div class="well">
-            <h4>
-                <form method="POST" action="/players/favorites">
-                    <input type="hidden" name="firstname" value=" <%=faves.firstname %>">
-                    <input type="hidden" name="lastname" value="<%= faves.lastname %> ">
-                    <input type="hidden" name="height" value=" <%= faves.height %>">
-                    <input type="hidden" name="weight" value=" <%= faves.weight %>">
-
-                <button class="remove" type="submit">remove</button>
-            </form>
-        </h4>
-        </div>
-        <% }); %>
-</div>
-
-<div class="delete"> 
+        <div class="delete"> 
             <h4>
                 <form method="POST" action="/players/favorites/?_method=DELETE">
-                    <input type="hidden" name="firstname" value=" <%=faves.firstname %>">
-                    <input type="hidden" name="lastname" value="<%= faves.lastname %> ">
-                    <input type="hidden" name="height" value=" <%= faves.height %>">
-                    <input type="hidden" name="weight" value=" <%= faves.weight %>">
+                    <input type="hidden" name="playerId" value=" <%=faves.id %>">
 
                 <button class="remove" type="submit">remove</button>
             </form>
         </h4>
 </div>
+        <% }); %>
+</div>
+
+<!-- <p class="comments">
+
+    <h4>Notes:</h4>
+        <% //note.forEach(element => { %>
+            <li><%= //element.note %> </li>
+        <% //}) %>
+        </p> 
+        form method        -->

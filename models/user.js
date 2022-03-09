@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         through: 'user_players',
         onDelete: 'CASCADE'
       })
+      models.user.hasMany(models.comment)
     }
   }
   user.init({

@@ -113,22 +113,17 @@ router.post('/favorites', async (req, res) => {
 })
 
 // DELETE ROUTE AT FAVORITES
-router.delete('/favorites/?_method=DELETE', async (erq, res) => {
+router.delete('/favorites', async (req, res) => {
     if (res.locals.user) {
-        try {
-            const userFound = await db.user.findOne({
+        try {      
+            await db.user_players.destroy({
+                
                 where: {
-                    id: res.locals.user.id
-                }
+                    userId: res.locals.user.id,
+                    playerId: req.body.playerId
+                }             
             })
-            const deletedFave = await db.user_players.destroy({
-                where: {
-                   
-                    playerId: req.params.playerId
-                }
-            })
-            await userFound.deletedFave.destroy()
-            console.log(deletedFave)
+          
             res.redirect("/players/favorites")
         } catch (err) {
             res.status(400).render('main/404.ejs')
@@ -136,5 +131,23 @@ router.delete('/favorites/?_method=DELETE', async (erq, res) => {
         }
     }
 })
+
+// // CREATE ROUTE FOR COMMENTS IN FAVORITES
+// router.put('/favorites', (req, res) => {
+//     db.comment.create({
+//         userId: res.locals.user.id,
+//         playerId: req.body.playerId,
+//         comment: req.body.comment
+//     })
+//     .then((post) => {
+//         res.redirect("/players/favorites")
+//     })
+//     .catch ((err) => {
+//         res.status(400).render('main/404.ejs')
+//         console.log(err)
+//     })
+// })
+
+
 
 module.exports = router
