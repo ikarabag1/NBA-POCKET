@@ -29,11 +29,11 @@ node, express, axios
 
 # MVP
 * login / sign up route page getting rendered
-* update ability for user info 
+* update ability for user password(not functional at the moment, needs work on it)
 * Profile route to search and display players by their firstname and have a favorites, logout option.
 * able to add a player to your favorites and redirects to favorites page
 * favorites route page displays all favorited players
-* show page displays specific player infos
+* comments section on favorites list that you can add notes about your favorites list and edit/update your comments
 
 
 
