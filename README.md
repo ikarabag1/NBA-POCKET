@@ -9,17 +9,17 @@ API KEY in .env
 
 # TECH WILL BE USED
 HTML, JS, CSS
-node, express, axios
+node, express, axios, Postgres SQL
 
 # USER STORIES
-* I would like to select and get info on NBA players.
+* I would like to search NBA Players by their name and get info on NBA players.
 * I would like to create favorite NBA players and keep track on their info, and delete when I want to.
-* I would like to display NBA player.
+* I would like add note on comment section of favorites list.
 
 # WIREFRAMES
 ![WireFraming](wireframes/index.jpg)
-![WireFraming](wireframes/Home.jpg)
-![WireFraming](wireframes/favorites-player.jpg)
+![WireFraming](wireframes/Profile.jpg)
+![WireFraming](wireframes/favorites.jpg)
 
 # RESTful ROUTES
 ![WireFraming](wireframes/RESTful-Routes.jpg)
