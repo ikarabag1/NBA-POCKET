@@ -10,7 +10,6 @@
             <h4>
                 <form method="POST" action="/players/favorites/?_method=DELETE">
                     <input type="hidden" name="playerId" value=" <%=faves.id %>">
-
                 <button class="remove" type="submit">remove</button>
             </form>
         </h4>
@@ -18,11 +17,15 @@
         <% }); %>
 </div>
 
-<!-- <p class="comments">
 
+<div class="comments">
     <h4>Notes:</h4>
-        <% //note.forEach(element => { %>
-            <li><%= //element.note %> </li>
-        <% //}) %>
+        <% comment.forEach(element => { %>
+            <li><%= element.note %> </li>
+        <% }) %>
         </p> 
-        form method        -->
+ <form method="POST" action="/players/favorites/comment">
+     <input type="text" name="note">
+     <button>add note for favorite players list</button>
+ </form>       
+</div>
