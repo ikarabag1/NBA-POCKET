@@ -74,7 +74,7 @@ router.get('/favorites', async (req, res) => {
             const faves = await userFound.getPlayers()
             const comment = await userFound.getComments()
 
-            console.log(faves)
+            // console.log(faves)
             res.render('users/favorites.ejs', {
                 faves, comment
             })
@@ -134,7 +134,7 @@ router.delete('/favorites', async (req, res) => {
     }
 })
 
-// CREATE ROUTE FOR COMMENTS IN FAVORITES
+// POST ROUTE --CREATE COMMENTS IN FAVORITES LIST
 router.post('/favorites/comment', async (req, res) => 
 {
     if (res.locals.user) {
@@ -159,6 +159,29 @@ router.post('/favorites/comment', async (req, res) =>
 }
 })
 
-
+// PUT ROUTE --EDIT COMMENTS IN FAVORITES LIST
+router.put('/favorites/comment/:commentId', async (req, res) => {
+    if (res.locals.user) {
+        try {
+            
+            const foundNote = await db.comment.findOne({
+                where: {
+                    id: req.params.commentId,
+                    userId: res.locals.user.id
+                }
+            })
+            console.log(foundNote, 'found')
+            const note = await foundNote.update({           
+                    note: req.body.note
+            })
+            console.log(note)
+            await foundNote.save(note);
+            res.redirect("/players/favorites")
+        }catch (err) {
+            res.status(400).render('main/404.ejs')
+            console.log(err)
+        }
+    }
+})
 
 module.exports = router

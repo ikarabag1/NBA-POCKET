@@ -22,10 +22,18 @@
     <h4>Notes:</h4>
         <% comment.forEach(element => { %>
             <li><%= element.note %> </li>
+                  
+            <form method="POST" action="/players/favorites/comment/<%=element.id  %>?_method=PUT">
+                <label for="note">Update your notes</label>
+                <input type="note" id="note" placeholder="edit your comment" name="note">
+                <button type="submit">edit</button>
+            </form>
         <% }) %>
-        </p> 
+      
  <form method="POST" action="/players/favorites/comment">
      <input type="text" name="note">
      <button>add note for favorite players list</button>
  </form>       
 </div>
+
+

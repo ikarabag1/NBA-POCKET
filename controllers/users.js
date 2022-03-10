@@ -68,16 +68,15 @@ router.put('/profile', async (req, res) => {
                     id: res.locals.user.id
                 }
             })
- 
             await userFound.update({
-                where: {
-                
+                where: {   
+                userId: res.locals.user.id ,               
                 password: req.body.password
                 }
             })
             await userFound.save(password);
-            console.log(userFound)
-            console.log(req.body)
+            // console.log(userFound)
+            // console.log(req.body)
             res.redirect('/')
         } catch (err) {
             res.status(400).render('main/404.ejs')
