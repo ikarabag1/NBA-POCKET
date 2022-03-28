@@ -1,40 +1,46 @@
 <!-- favorites and players delete form -->
-<div class="well">
-   
+<div class="faves">
+
     <h3>All <%= faves.length %> of my favourite NBA Players!</h3>
-    
-    <% faves.forEach(faves => { %>  
-        <p>Name: <%= faves.firstname%> <%= faves.lastname%> </p>
-        <p>Height <%= faves.height%> </p>
-        <p>Weight <%= faves.weight%> </p>
-        <div class="delete"> 
-            <h4>
-                <form method="POST" action="/players/favorites/?_method=DELETE">
-                    <input type="hidden" name="playerId" value=" <%=faves.id %>">
-                <button class="remove" type="submit">remove</button>
-            </form>
-        </h4>
-</div>
-        <% }); %>
+
+    <% faves.forEach(faves => { %>
+    <p>Name: <%= faves.firstname%> <%= faves.lastname%> </p>
+    <p>Height <%= faves.height%> </p>
+    <p>Weight <%= faves.weight%> </p>
+
+    <div class="destroy">
+        <form method="POST" action="/players/favorites/?_method=DELETE">
+            <input type="hidden" name="playerId" value=" <%=faves.id %>">
+            <button class="remove" type="submit">remove</button>
+        </form>
+    </div>
+    <% }); %>
 </div>
 
 <!-- comments adding and edit form -->
 <div class="comments">
-    <h4>Notes:</h4>
-        <% comment.forEach(element => { %>
-            <li><%= element.note %> </li>
-                  
-            <form method="POST" action="/players/favorites/comment/<%=element.id  %>?_method=PUT">
-                <label for="note">Update your notes</label>
-                <input type="note" id="note" placeholder="edit your comment" name="note">
-                <button type="submit">edit</button>
-            </form>
-        <% }) %>
-      
- <form method="POST" action="/players/favorites/comment">
-     <input type="text" name="note">
-     <button>add note for favorite players list</button>
- </form>       
+    <h3>Notes:</h3>
+    <% comment.forEach(element => { %>
+    <li><%= element.note %> </li>
+
+    <div class="update">
+        <form method="POST" action="/comments/favorites/comment/<%=element.id%>?_method=PUT">
+            <input type="note" id="note" placeholder="edit your comment" name="note">
+            <button type="submit">update</button>
+        </form>
+    </div>
+
+    <div class="destroy">
+        <form method="POST" action="/comments/favorites/comment/<%=element.id%>?_method=DELETE">
+            <input type="hidden" id="note" name="note" value=" <%=element.id %>">
+            <button type="submit">remove</button>
+        </form>
+    </div>
+    <% }) %>
+    <div class="create">
+        <form method="POST" action="/comments/favorites/comment">
+            <input type="text" name="note">
+            <button>add note for favorites</button>
+        </form>
+    </div>
 </div>
-
-

@@ -26,6 +26,7 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => { //user is the model name
     const [newUser, created] = await db.user.findOrCreate({ // find or create always get 2 variable into the arrray--will always return two elements in it
         where: {
+            username: req.body.username,
             email: req.body.email
         }
     })
@@ -58,32 +59,6 @@ router.get('/login', (req, res) => {
     })
 })
 
-
-// EDIT --PUT ROUTE
-router.put('/profile', async (req, res) => {
-    if (res.locals.user) {
-        try {
-            const userFound = await db.user.findOne({
-                where: {
-                    id: res.locals.user.id
-                }
-            })
-            await userFound.update({
-                where: {   
-                userId: res.locals.user.id ,               
-                password: req.body.password
-                }
-            })
-            await userFound.save(password);
-            // console.log(userFound)
-            // console.log(req.body)
-            res.redirect('/')
-        } catch (err) {
-            res.status(400).render('main/404.ejs')
-            console.log(err)
-        }
-    }
-})
 
 // SIGN UP --POST ROUTE
 // what should happen in login page
@@ -127,6 +102,35 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+// EDIT --PUT ROUTE
+router.put('/profile', async (req, res) => {
+    if (res.locals.user) {
+        try {
+            const userFound = await db.user.findOne({
+                where: {
+                    
+                    id: res.locals.user.id
+                }
+            })
+            await userFound.update({
+                where: {   
+                userId: res.locals.user.id ,  
+                            
+                password: req.body.password
+                }
+            })
+            const hashedPassword = bcrypt.hashSync(req.body.password, 10) // to hash that password, how many times
+            userFound.password = hashedPassword //to get the password newUser entered
+            await userFound.save()
+            // console.log(userFound)
+            // console.log(req.body)
+            res.redirect('/')
+        } catch (err) {
+            res.status(400).render('main/404.ejs')
+            console.log(err)
+        }
+    }
+})
 
 // export modules all these routes to the entry point file
 module.exports = router

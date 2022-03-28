@@ -40,6 +40,8 @@ app.use( async (req, res, next) => {
 app.use('/users', require('./controllers/users.js'))
 // PLAYERS ROUTES
 app.use('/players', require('./controllers/players.js'))
+// COMMENTS ROUTES
+app.use('/comments', require('./controllers/comments.js'))
 
 
 

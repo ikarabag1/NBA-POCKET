@@ -76,7 +76,8 @@ router.get('/favorites', async (req, res) => {
 
             // console.log(faves)
             res.render('users/favorites.ejs', {
-                faves, comment
+                faves,
+                comment
             })
         } catch (err) {
             res.status(400).render('main/404.ejs')
@@ -117,67 +118,16 @@ router.post('/favorites', async (req, res) => {
 // DELETE ROUTE AT FAVORITES
 router.delete('/favorites', async (req, res) => {
     if (res.locals.user) {
-        try {      
+        try {
             await db.user_players.destroy({
-                
+
                 where: {
                     userId: res.locals.user.id,
                     playerId: req.body.playerId
-                }             
+                }
             })
-          
             res.redirect("/players/favorites")
         } catch (err) {
-            res.status(400).render('main/404.ejs')
-            console.log(err)
-        }
-    }
-})
-
-// POST ROUTE --CREATE COMMENTS IN FAVORITES LIST
-router.post('/favorites/comment', async (req, res) => 
-{
-    if (res.locals.user) {
-        try {
-            const userFound = await db.user.findOne({
-                where: {
-                    id: res.locals.user.id
-                }
-            })  
-            const [comment, commentCreated] =   
-            await db.comment.findOrCreate({
-        where: {
-        userId: res.locals.user.id,
-        note: req.body.note
-        }
-    })    
-        res.redirect("/players/favorites")
-    } catch (err) {
-        res.status(400).render('main/404.ejs')
-        console.log(err)
-    }
-}
-})
-
-// PUT ROUTE --EDIT COMMENTS IN FAVORITES LIST
-router.put('/favorites/comment/:commentId', async (req, res) => {
-    if (res.locals.user) {
-        try {
-            
-            const foundNote = await db.comment.findOne({
-                where: {
-                    id: req.params.commentId,
-                    userId: res.locals.user.id
-                }
-            })
-            console.log(foundNote, 'found')
-            const note = await foundNote.update({           
-                    note: req.body.note
-            })
-            console.log(note)
-            await foundNote.save(note);
-            res.redirect("/players/favorites")
-        }catch (err) {
             res.status(400).render('main/404.ejs')
             console.log(err)
         }
