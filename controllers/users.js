@@ -60,7 +60,7 @@ router.get('/login', (req, res) => {
 })
 
 
-// SIGN UP --POST ROUTE
+// LOGIN --POST ROUTE
 // what should happen in login page
 router.post('/login', async (req, res) => {
     // find them

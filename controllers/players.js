@@ -24,7 +24,7 @@ require('dotenv').config() //process.env.SECRET
 // console.log(process.env.RAPID_API_KEY)
 
 // SEARCH on profile
-router.get('/nbaplayersapi', (req, res) => {
+router.get('/', (req, res) => {
     // use the request body -- req.body
     // console.log(req.query)
     if (req.query.search) {

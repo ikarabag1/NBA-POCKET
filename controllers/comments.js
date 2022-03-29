@@ -24,7 +24,7 @@ require('dotenv').config() //process.env.SECRET
 // console.log(process.env.RAPID_API_KEY)
 
 // POST ROUTE --CREATE COMMENTS IN FAVORITES LIST
-router.post('/favorites/comment', async (req, res) => {
+router.post('/favorites', async (req, res) => {
     if (res.locals.user) {
         try {
             const userFound = await db.user.findOne({
@@ -48,7 +48,7 @@ router.post('/favorites/comment', async (req, res) => {
 })
 
 // PUT ROUTE --EDIT COMMENTS IN FAVORITES LIST
-router.put('/favorites/comment/:commentId', async (req, res) => {
+router.put('/favorites/:commentId', async (req, res) => {
     if (res.locals.user) {
         try {     
             const foundNote = await db.comment.findOne({
@@ -72,7 +72,7 @@ router.put('/favorites/comment/:commentId', async (req, res) => {
 })
 
 // DELETE ROUTE --DELETE COMMENTS IN FAVORITES LIST
-router.delete('/favorites/comment/:commentId', async (req, res) => {
+router.delete('/favorites/:commentId', async (req, res) => {
     if (res.locals.user) {
         try {      
             const foundNote = await db.comment.destroy({
