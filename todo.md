@@ -154,5 +154,44 @@
 - [x] Add navigation links (Profile, Favorites, Logout)
 - [x] Create hero section with CTAs
 - [x] Add features section
-- [ ] Deploy all changes
-- [ ] Test navigation flow
+- [x] Deploy all changes
+- [ ] Test navigation flow (waiting for Render redeploy)
+
+
+## Comprehensive Testing
+- [ ] Test home page loads correctly
+- [ ] Test navbar Login/Sign Up buttons
+- [ ] Test signup with new email
+- [ ] Verify redirect to profile after signup
+- [ ] Test logout functionality
+- [ ] Test login with created account
+- [ ] Verify redirect to profile after login
+- [ ] Test profile page rendering
+- [ ] Test player search functionality
+- [ ] Test favorites page
+- [ ] Test add to favorites
+- [ ] Test remove from favorites
+- [ ] Test add/edit/delete comments
+- [ ] Document any bugs found
+
+
+## Add Animated Basketball Court Background
+- [ ] Create CSS animation for zooming basketball court
+- [ ] Add basketball court SVG or image
+- [ ] Implement smooth zoom in/out animation
+- [ ] Apply to all pages (home, login, signup, profile, favorites)
+- [ ] Ensure performance is optimized
+
+## Fix Signup and Login Pages
+- [ ] Update signup page (new.ejs) with black/white/silver/gold theme
+- [ ] Update login page (login.ejs) with black/white/silver/gold theme
+- [ ] Remove username field from signup form
+- [ ] Make forms consistent with home page design
+- [ ] Add proper error message display
+
+## Fix Authentication Controller
+- [ ] Debug POST /users route (signup)
+- [ ] Ensure proper redirect to profile after signup
+- [ ] Verify session creation
+- [ ] Test database insertion
+- [ ] Add error handling and user feedback
