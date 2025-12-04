@@ -22,14 +22,14 @@
 - [x] Improve overall styling and layout consistency
 
 ## Testing
-- [ ] Test user registration and login
-- [ ] Test player search functionality
-- [ ] Test add to favorites
-- [ ] Test remove from favorites
-- [ ] Test comment CRUD operations
-- [ ] Test logout functionality
+- [x] Test user registration and login
+- [x] Test player search functionality
+- [x] Test add to favorites
+- [x] Test remove from favorites
+- [x] Test comment CRUD operations
+- [x] Test logout functionality
 
 ## Documentation & Deployment
-- [ ] Update README if needed
-- [ ] Commit all changes to GitHub
-- [ ] Ensure code is production-ready
+- [x] Update README if needed
+- [x] Commit all changes to GitHub
+- [x] Ensure code is production-ready
