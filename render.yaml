@@ -5,7 +5,7 @@ services:
     runtime: node
     env: node
     plan: free
-    buildCommand: npm install && npx sequelize-cli db:migrate
+    buildCommand: npm install && chmod +x migrate.sh && ./migrate.sh
     startCommand: node index.js
     envVars:
       - key: NODE_ENV

@@ -212,7 +212,7 @@
 - [x] Create deploy branch from main
 - [ ] Configure Render to deploy from deploy branch instead of main
 - [x] Push deploy branch to GitHub
-- [ ] Merge main into deploy and trigger deployment
+- [x] Merge main into deploy and trigger deployment
 - [x] Document workflow: main (dev) → deploy (production)
 
 
@@ -236,3 +236,10 @@
 - [x] Provide step-by-step git pull instructions
 - [x] Explain how to resolve merge conflicts if they occur
 - [x] Guide through testing after merge
+
+
+## Fix Production Database - Run Migrations
+- [ ] Update render.yaml to include migration command
+- [ ] Trigger redeployment to run migrations
+- [ ] Verify users table exists in production
+- [ ] Test signup/login on live site
