@@ -1,5 +1,7 @@
 # NBA POCKET 🏀
 
+**Live Demo:** 🚀 [https://nba-pocket.onrender.com](https://nba-pocket.onrender.com)
+
 Now NBA players info are in your pocket to track and to favorite the players you pick.
 
 ## ⚠️ SECURITY NOTICE
@@ -84,7 +86,9 @@ Now NBA players info are in your pocket to track and to favorite the players you
 
 **GitHub Repository:** https://github.com/ikarabag1/NBA-POCKET
 
-**Status:** Ready for deployment
+**Live Deployment:** 🌐 [https://nba-pocket.onrender.com](https://nba-pocket.onrender.com)
+
+**Status:** ✅ Deployed and Live on Render
 
 ### 🚀 Deploy to Render (Recommended - Free Tier)
 
