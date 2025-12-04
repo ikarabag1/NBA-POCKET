@@ -26,7 +26,6 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => { //user is the model name
     const [newUser, created] = await db.user.findOrCreate({ // find or create always get 2 variable into the arrray--will always return two elements in it
         where: {
-            username: req.body.username,
             email: req.body.email
         }
     })

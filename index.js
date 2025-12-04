@@ -50,7 +50,7 @@ app.use('/comments', require('./controllers/comments.js'))
 // HOME VIEW --GET // to render the form created in new.ejs in views/users
 app.get('/', (req, res) => {
     // res.send('HULLO???') //to check on browser if it is working lsitening
-    res.render('home')
+    res.render('home', { user: res.locals.user })
 })
 
 // check for an env PORT, otherwise use 8000
