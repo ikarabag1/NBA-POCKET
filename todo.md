@@ -206,3 +206,11 @@
 - [ ] Test signup with username + email + password
 - [ ] Test login with username + password
 - [ ] Deploy and verify on Render
+
+
+## Setup Deployment Branch Workflow
+- [ ] Create deploy branch from main
+- [ ] Configure Render to deploy from deploy branch instead of main
+- [ ] Push deploy branch to GitHub
+- [ ] Test deployment from deploy branch
+- [ ] Document workflow: main (dev) → deploy (production)
