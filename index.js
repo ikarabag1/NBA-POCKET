@@ -14,6 +14,7 @@ const methodOverride = require("method-override");
 app.set('view engine', 'ejs') //set the view engine to ejs
 // app.use(require("morgan")("dev"));
 app.use(ejsLayouts) //tell express we want to use layouts
+app.use(express.static('public')) //serve static files from public directory
 app.use(cookieParser()) //gives us access to req.cookies
 app.use(express.urlencoded({extended: false})) //body parser (to make req.bosy work) --apply to every controoller routes so always put it in indexs.js
 app.use(methodOverride("_method"));

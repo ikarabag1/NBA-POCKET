@@ -62,4 +62,14 @@
 - [x] Update README with live Render URL
 - [x] Update GitHub repository description
 - [x] Update GitHub repository homepage URL
-- [ ] Commit changes
+- [x] Commit changes
+
+
+## Social Media Preview & Favicon
+- [x] Create basketball favicon
+- [x] Create Open Graph preview image
+- [x] Add Open Graph meta tags to layout.ejs
+- [x] Add favicon link to layout.ejs
+- [x] Add static file serving middleware
+- [ ] Test social media preview
+- [ ] Commit and deploy changes
