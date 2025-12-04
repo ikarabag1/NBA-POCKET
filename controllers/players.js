@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-// GET ROUTE TO ADD TO FAVORITES
+// GET ROUTE TO ADD TO FAVORITES - Fixed user variable
 router.get('/favorites', async (req, res) => {
     if (res.locals.user) {
         try {
