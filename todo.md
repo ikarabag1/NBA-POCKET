@@ -243,3 +243,11 @@
 - [ ] Trigger redeployment to run migrations
 - [ ] Verify users table exists in production
 - [ ] Test signup/login on live site
+
+
+## Fix Add to Collection Feature
+- [x] Investigate the issue with adding players to favorites
+- [x] Check player controller and routes
+- [x] Fix the add to collection functionality - added user variable to favorites route
+- [ ] Deploy fix to production
+- [ ] Test on live site

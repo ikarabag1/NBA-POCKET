@@ -55,7 +55,8 @@ router.get('/favorites', async (req, res) => {
 
             res.render('users/favorites.ejs', {
                 faves,
-                comment
+                comment,
+                user: res.locals.user
             })
         } catch (err) {
             res.status(400).render('main/404.ejs')
