@@ -209,11 +209,11 @@
 
 
 ## Setup Deployment Branch Workflow
-- [ ] Create deploy branch from main
+- [x] Create deploy branch from main
 - [ ] Configure Render to deploy from deploy branch instead of main
-- [ ] Push deploy branch to GitHub
-- [ ] Test deployment from deploy branch
-- [ ] Document workflow: main (dev) → deploy (production)
+- [x] Push deploy branch to GitHub
+- [ ] Merge main into deploy and trigger deployment
+- [x] Document workflow: main (dev) → deploy (production)
 
 
 ## Consolidate Documentation
@@ -230,3 +230,9 @@
 - [x] Add common error solutions
 - [x] Include port configuration instructions
 - [x] Add database setup verification steps
+
+
+## Help User Merge GitHub Changes to Local
+- [x] Provide step-by-step git pull instructions
+- [x] Explain how to resolve merge conflicts if they occur
+- [x] Guide through testing after merge
