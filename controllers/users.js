@@ -29,6 +29,11 @@ router.post('/', async (req, res) => {
         const [newUser, created] = await db.user.findOrCreate({
             where: {
                 email: req.body.email
+            },
+            defaults: {
+                email: req.body.email,
+                username: req.body.email.split('@')[0], // Use email prefix as username
+                password: '' // Will be set after hashing
             }
         })
         
