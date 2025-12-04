@@ -195,3 +195,14 @@
 - [ ] Verify session creation
 - [ ] Test database insertion
 - [ ] Add error handling and user feedback
+
+
+## Restore Username Field to Authentication
+- [ ] Add username field back to signup form (new.ejs) - username + email + password
+- [ ] Update signup controller to accept and save username
+- [ ] Update login form (login.ejs) to use username + password (remove email field)
+- [ ] Update login controller to authenticate with username + password
+- [ ] Keep premium black/white/silver/gold design
+- [ ] Test signup with username + email + password
+- [ ] Test login with username + password
+- [ ] Deploy and verify on Render

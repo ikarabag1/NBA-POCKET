@@ -28,11 +28,11 @@ router.post('/', async (req, res) => {
     try {
         const [newUser, created] = await db.user.findOrCreate({
             where: {
-                email: req.body.email
+                username: req.body.username
             },
             defaults: {
+                username: req.body.username,
                 email: req.body.email,
-                username: req.body.email.split('@')[0], // Use email prefix as username
                 password: '' // Will be set after hashing
             }
         })
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
         if (!created) {
             console.log('User already exists')
             return res.render('users/new.ejs', {
-                error: 'An account with this email already exists. Please login instead.'
+                error: 'This username is already taken. Please choose a different username.'
             })
         }
         
@@ -74,21 +74,21 @@ router.post('/login', async (req, res) => {
     try {
         const user = await db.user.findOne({
             where: {
-                email: req.body.email
+                username: req.body.username
             }
         })
         
         if (!user) {
             console.log('User not found')
             return res.render('users/login.ejs', {
-                error: 'Invalid email or password'
+                error: 'Invalid username or password'
             })
         }
         
         if (!bcrypt.compareSync(req.body.password, user.password)) {
             console.log('Incorrect password')
             return res.render('users/login.ejs', {
-                error: 'Invalid email or password'
+                error: 'Invalid username or password'
             })
         }
         
