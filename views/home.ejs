@@ -1,0 +1,336 @@
+<div class="home-container">
+    <div class="hero-section">
+        <div class="logo-section">
+            <div class="logo-circle">
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#FF6B35" stroke="#2C3E50" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="25" fill="#FFA500"/>
+                    <path d="M 30 30 L 70 70 M 70 30 L 30 70" stroke="#2C3E50" stroke-width="2"/>
+                </svg>
+            </div>
+            <h1>NBA POCKET</h1>
+            <p class="tagline">Your favorite NBA players, all in one place</p>
+        </div>
+
+        <div class="auth-section">
+            <% if (user) { %>
+                <div class="welcome-message">
+                    <h2>Welcome back, <%= user.username %>!</h2>
+                    <div class="action-buttons">
+                        <a href="/users/profile" class="btn btn-primary">Go to Profile</a>
+                        <a href="/players/favorites" class="btn btn-secondary">View Favorites</a>
+                        <a href="/users/logout" class="btn btn-logout">Logout</a>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="auth-forms">
+                    <div class="form-tabs">
+                        <button class="tab-btn active" onclick="showLogin()">Login</button>
+                        <button class="tab-btn" onclick="showSignup()">Sign Up</button>
+                    </div>
+
+                    <div id="login-form" class="auth-form active">
+                        <h2>Login to Your Account</h2>
+                        <form action="/users/login" method="POST">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" name="email" id="login-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" name="password" id="login-password" placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+
+                    <div id="signup-form" class="auth-form">
+                        <h2>Create New Account</h2>
+                        <form action="/users" method="POST">
+                            <div class="form-group">
+                                <label for="signup-email">Email</label>
+                                <input type="email" name="email" id="signup-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-username">Username</label>
+                                <input type="text" name="username" id="signup-username" placeholder="Choose a username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-password">Password</label>
+                                <input type="password" name="password" id="signup-password" placeholder="Create a password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔍 Search Players</h3>
+                <p>Find any NBA player by name and view their stats</p>
+            </div>
+            <div class="feature-card">
+                <h3>⭐ Save Favorites</h3>
+                <p>Keep track of your favorite players in one place</p>
+            </div>
+            <div class="feature-card">
+                <h3>📝 Add Notes</h3>
+                <p>Write and manage notes about your favorite players</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .home-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .hero-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+    }
+
+    .logo-section {
+        flex: 1;
+        text-align: center;
+        min-width: 300px;
+    }
+
+    .logo-circle {
+        margin: 0 auto 20px;
+        width: 120px;
+        height: 120px;
+    }
+
+    .logo-section h1 {
+        font-size: 3em;
+        margin: 20px 0 10px;
+        color: #2C3E50;
+        letter-spacing: 2px;
+    }
+
+    .tagline {
+        font-size: 1.2em;
+        color: #7f8c8d;
+        margin-top: 10px;
+    }
+
+    .auth-section {
+        flex: 1;
+        min-width: 350px;
+    }
+
+    .auth-forms {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .form-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 12px;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        color: #7f8c8d;
+        transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+        color: #FF6B35;
+        border-bottom-color: #FF6B35;
+    }
+
+    .auth-form {
+        display: none;
+    }
+
+    .auth-form.active {
+        display: block;
+    }
+
+    .auth-form h2 {
+        margin-bottom: 20px;
+        color: #2C3E50;
+        font-size: 1.5em;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2C3E50;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #FF6B35;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s;
+    }
+
+    .btn-primary {
+        background-color: #FF6B35;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #e55a2b;
+    }
+
+    .btn-secondary {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-logout {
+        background-color: #95a5a6;
+        color: white;
+    }
+
+    .btn-logout:hover {
+        background-color: #7f8c8d;
+    }
+
+    .btn-block {
+        width: 100%;
+        display: block;
+    }
+
+    .welcome-message {
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .welcome-message h2 {
+        color: #2C3E50;
+        margin-bottom: 30px;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .features-section {
+        margin-top: 60px;
+        text-align: center;
+    }
+
+    .features-section h2 {
+        font-size: 2em;
+        color: #2C3E50;
+        margin-bottom: 30px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .feature-card h3 {
+        color: #2C3E50;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+    }
+
+    .feature-card p {
+        color: #7f8c8d;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            flex-direction: column;
+        }
+
+        .logo-section h1 {
+            font-size: 2em;
+        }
+    }
+</style>
+
+<script>
+    function showLogin() {
+        document.getElementById('login-form').classList.add('active');
+        document.getElementById('signup-form').classList.remove('active');
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+    }
+
+    function showSignup() {
+        document.getElementById('signup-form').classList.add('active');
+        document.getElementById('login-form').classList.remove('active');
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.querySelectorAll('.tab-btn')[0].classList.remove('active');
+    }
+</script>

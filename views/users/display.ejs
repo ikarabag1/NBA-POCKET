@@ -1,16 +1,66 @@
-<div>
-    <% playerData.forEach(element => { %>
-    <p>Name: <%= element.firstName%> <%= element.lastName%> </p>
-    <p>Height <%= element.heightInMeters%> </p>
-    <p>Weight <%= element.weightInKilograms%> </p>
+<div class="player-search-results">
+    <% if (playerData && playerData.length > 0) { %>
+        <h3>Search Results</h3>
+        <% playerData.forEach(element => { %>
+            <div class="player-card">
+                <h4><%= element.first_name %> <%= element.last_name %></h4>
+                <p><strong>Position:</strong> <%= element.position || 'N/A' %></p>
+                <p><strong>Height:</strong> <%= element.height || 'N/A' %></p>
+                <p><strong>Weight:</strong> <%= element.weight ? element.weight + ' lbs' : 'N/A' %></p>
+                <% if (element.team) { %>
+                    <p><strong>Team:</strong> <%= element.team.full_name %></p>
+                <% } %>
 
-    <form method="POST" action="/players/favorites">
-        <input type="hidden" name="firstname" value=" <%=element.firstName %>">
-        <input type="hidden" name="lastname" value="<%= element.lastName %> ">
-        <input type="hidden" name="height" value=" <%= element.heightInMeters %>">
-        <input type="hidden" name="weight" value=" <%= element.weightInKilograms %>">
-        <button class="add" type="submit">add to favorites</button>
-    </form>
-    <% }) %>
-
+                <form method="POST" action="/players/favorites">
+                    <input type="hidden" name="firstname" value="<%= element.first_name %>">
+                    <input type="hidden" name="lastname" value="<%= element.last_name %>">
+                    <input type="hidden" name="height" value="<%= element.height || '' %>">
+                    <input type="hidden" name="weight" value="<%= element.weight || '' %>">
+                    <input type="hidden" name="age" value="<%= element.age || '' %>">
+                    <button class="add" type="submit">Add to Favorites</button>
+                </form>
+            </div>
+        <% }) %>
+    <% } else if (playerData && playerData.length === 0) { %>
+        <p>No players found. Try a different search term.</p>
+    <% } else { %>
+        <p>Enter a player's name in the search box above to find NBA players.</p>
+    <% } %>
 </div>
+
+<style>
+    .player-search-results {
+        margin-top: 20px;
+    }
+    
+    .player-card {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .player-card h4 {
+        margin-top: 0;
+        color: #333;
+    }
+    
+    .player-card p {
+        margin: 5px 0;
+    }
+    
+    .add {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    
+    .add:hover {
+        background-color: #45a049;
+    }
+</style>

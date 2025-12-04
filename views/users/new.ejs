@@ -1,14 +1,161 @@
-<form action="/users" method="POST">
-    <!-- email and password -->
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
+<div class="signup-container">
+    <div class="signup-box">
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Join NBA Pocket to track your favorite players</p>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
+        <form action="/users" method="POST" class="signup-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="email"
+                />
+            </div>
 
-    <label for="username">Username:</label>
-    <input type="username" name="username" id="username">
-    
-    <button type="submit">Sign up!</button>
-</form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input 
+                    type="text" 
+                    name="username" 
+                    id="username" 
+                    placeholder="Choose a username"
+                    required
+                    autocomplete="username"
+                />
+            </div>
 
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder="Create a password (min. 6 characters)"
+                    minlength="6"
+                    required
+                    autocomplete="new-password"
+                />
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="/users/login">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .signup-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 20px;
+    }
+
+    .signup-box {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 450px;
+        width: 100%;
+    }
+
+    .signup-box h1 {
+        color: #2C3E50;
+        font-size: 2em;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .subtitle {
+        color: #7f8c8d;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .signup-form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2C3E50;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #FF6B35;
+    }
+
+    .signup-btn {
+        width: 100%;
+        background: #FF6B35;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 10px;
+    }
+
+    .signup-btn:hover {
+        background: #e55a2b;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 25px;
+        padding-top: 25px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .login-link p {
+        color: #7f8c8d;
+    }
+
+    .login-link a {
+        color: #FF6B35;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .signup-box {
+            padding: 30px 20px;
+        }
+
+        .signup-box h1 {
+            font-size: 1.5em;
+        }
+    }
+</style>
