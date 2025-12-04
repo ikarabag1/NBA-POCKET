@@ -106,3 +106,13 @@
 - [x] Update welcome message to display email
 - [ ] Deploy fixes
 - [ ] Test signup and login functionality
+
+
+## Debug ERD, Wireframes, and RESTful Routes
+- [x] Review ERD wireframe image
+- [x] Check database models against ERD
+- [x] Verify all RESTful routes are documented correctly
+- [x] Created DEBUG_ANALYSIS.md with findings
+- [x] Update README with corrected information
+- [x] Ensure wireframes match current UI
+- [x] All routes verified and working

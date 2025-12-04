@@ -221,17 +221,20 @@ Render provides free hosting for web services and PostgreSQL databases, perfect 
 
 **Users Table:**
 - id (Primary Key)
-- email (VARCHAR 255)
+- email (VARCHAR 255) - Primary identifier for login
 - password (VARCHAR 255, hashed)
-- username (VARCHAR 255)
+- username (VARCHAR 255) - Optional/legacy field
+
+> **Note:** The signup form now uses email-only authentication. Username field exists in the database for backward compatibility but is not required for new signups.
 
 **Players Table:**
 - id (Primary Key)
 - firstname (VARCHAR 255)
 - lastname (VARCHAR 255)
-- age (NUMBER)
-- height (NUMBER)
-- weight (NUMBER)
+- height (DECIMAL)
+- weight (DECIMAL)
+
+> **Note:** Player data is fetched from the BALLDONTLIE API. The age field shown in the ERD wireframe is not currently stored in the database.
 
 **User_Players Table (Join Table):**
 - id (Primary Key)
