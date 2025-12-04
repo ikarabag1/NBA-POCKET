@@ -26,6 +26,18 @@ router.get('/new', (req, res) => {
 // SIGN UP --POST ROUTE 
 router.post('/', async (req, res) => {
     try {
+        // Validate required fields
+        if (!req.body.username || !req.body.email || !req.body.password) {
+            return res.render('users/new.ejs', {
+                error: 'All fields are required. Please fill in username, email, and password.'
+            })
+        }
+        
+        console.log('Signup attempt:', {
+            username: req.body.username,
+            email: req.body.email,
+            hasPassword: !!req.body.password
+        })
         const [newUser, created] = await db.user.findOrCreate({
             where: {
                 username: req.body.username
@@ -58,6 +70,11 @@ router.post('/', async (req, res) => {
         res.redirect('/users/profile')
     } catch (err) {
         console.error('Signup error:', err)
+        console.error('Error details:', {
+            message: err.message,
+            stack: err.stack,
+            body: req.body
+        })
         res.render('users/new.ejs', {
             error: 'An error occurred during signup. Please try again.'
         })
