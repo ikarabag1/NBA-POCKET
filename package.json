@@ -4,6 +4,7 @@
   "description": "# PROJECT IDEA AND PITCH Now NBA players info are in your pocket to track and to favourite the players you pick.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

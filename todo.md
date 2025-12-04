@@ -33,3 +33,10 @@
 - [x] Update README if needed
 - [x] Commit all changes to GitHub
 - [x] Ensure code is production-ready
+
+
+## Render Deployment
+- [x] Create render.yaml configuration
+- [x] Create build script
+- [x] Update README with Render deployment instructions
+- [ ] Test deployment on Render (user action required)

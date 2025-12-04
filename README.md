@@ -77,13 +77,89 @@ Now NBA players info are in your pocket to track and to favorite the players you
 
 **Status:** Ready for deployment
 
-### Deploy to Heroku
+### 🚀 Deploy to Render (Recommended - Free Tier)
+
+Render provides free hosting for web services and PostgreSQL databases, perfect for this application.
+
+#### Quick Deploy (Automatic)
+
+1. **Fork this repository** to your GitHub account
+
+2. **Sign up for Render** at https://render.com
+
+3. **Create New Web Service**
+   - Click "New +" → "Web Service"
+   - Connect your GitHub account
+   - Select the `NBA-POCKET` repository
+   - Render will automatically detect the `render.yaml` configuration
+
+4. **Configure Environment Variables**
+   - `BALLDONTLIE_API_KEY`: Your API key from https://app.balldontlie.io/signup
+   - `SECRET`: Will be auto-generated (or set your own)
+   - `DATABASE_URL`: Will be auto-configured from the database
+
+5. **Deploy**
+   - Click "Create Web Service"
+   - Render will automatically:
+     - Create a PostgreSQL database
+     - Install dependencies
+     - Run migrations
+     - Start the application
+
+6. **Access Your App**
+   - Your app will be live at: `https://nba-pocket-xxxx.onrender.com`
+   - First request may take 30-60 seconds (free tier cold start)
+
+#### Manual Deploy (Step-by-Step)
+
+1. **Create PostgreSQL Database**
+   - Go to Render Dashboard
+   - Click "New +" → "PostgreSQL"
+   - Name: `nba-pocket-db`
+   - Plan: Free
+   - Click "Create Database"
+   - Copy the **Internal Database URL**
+
+2. **Create Web Service**
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Configure:
+     - **Name:** `nba-pocket`
+     - **Environment:** Node
+     - **Build Command:** `npm install && npx sequelize-cli db:migrate`
+     - **Start Command:** `node index.js`
+
+3. **Add Environment Variables**
+   - `DATABASE_URL`: Paste the Internal Database URL
+   - `SECRET`: Generate a random string (e.g., use https://randomkeygen.com/)
+   - `BALLDONTLIE_API_KEY`: Your NBA API key
+   - `NODE_ENV`: `production`
+
+4. **Deploy**
+   - Click "Create Web Service"
+   - Wait for deployment (3-5 minutes)
+
+#### Important Notes for Render Free Tier
+
+⚠️ **Free tier limitations:**
+- Services spin down after 15 minutes of inactivity
+- First request after inactivity takes 30-60 seconds to wake up
+- Database has 1GB storage limit
+- 750 hours/month of runtime
+
+💡 **Tips:**
+- Use a service like [UptimeRobot](https://uptimerobot.com/) to ping your app every 14 minutes to keep it awake
+- Database persists even when web service is sleeping
+
+### Other Deployment Options
+
+#### Deploy to Heroku
 
 1. Create a Heroku account at https://heroku.com
 2. Install Heroku CLI: `npm install -g heroku`
 3. Login: `heroku login`
 4. Create app: `heroku create your-app-name`
-5. Add PostgreSQL: `heroku addons:create heroku-postgresql:mini`
+5. Add PostgreSQL: `heroku addons:create heroku-postgresql:essential-0`
 6. Set environment variables:
    ```bash
    heroku config:set SECRET=your_secret_key
@@ -93,9 +169,8 @@ Now NBA players info are in your pocket to track and to favorite the players you
 8. Run migrations: `heroku run npx sequelize-cli db:migrate`
 9. Open app: `heroku open`
 
-### Other Deployment Options
-- **Railway:** https://railway.app
-- **Render:** https://render.com
+#### Other Platforms
+- **Railway:** https://railway.app (Free tier with PostgreSQL)
 - **DigitalOcean App Platform:** https://www.digitalocean.com/products/app-platform
 
 ## 📋 RESTful ROUTES

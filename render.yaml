@@ -1,0 +1,29 @@
+services:
+  # Web Service
+  - type: web
+    name: nba-pocket
+    runtime: node
+    env: node
+    plan: free
+    buildCommand: npm install && npx sequelize-cli db:migrate
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nba-pocket-db
+          property: connectionString
+      - key: SECRET
+        generateValue: true
+      - key: BALLDONTLIE_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000
+
+databases:
+  # PostgreSQL Database
+  - name: nba-pocket-db
+    plan: free
+    databaseName: nba_pocket
+    user: nba_pocket_user
