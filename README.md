@@ -2,6 +2,15 @@
 
 Now NBA players info are in your pocket to track and to favorite the players you pick.
 
+## ⚠️ SECURITY NOTICE
+
+**IMPORTANT:** Never commit your `.env` file or expose your API keys!
+
+- ✅ `.env` is already in `.gitignore`
+- ✅ Use `.env.example` as a template
+- ✅ Get your own API key from https://app.balldontlie.io/signup
+- ✅ See `SECURITY.md` for detailed security guidelines
+
 ## 🚀 INSTALL INSTRUCTIONS
 
 1. **Fork and clone the repo**

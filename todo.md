@@ -40,3 +40,12 @@
 - [x] Create build script
 - [x] Update README with Render deployment instructions
 - [ ] Test deployment on Render (user action required)
+
+
+## Security
+- [x] Scan for exposed API keys
+- [x] Remove any hardcoded keys from code
+- [x] Update .gitignore to exclude sensitive files
+- [x] Add security warnings to documentation
+- [x] Verify .env is not committed
+- [x] Create SECURITY.md file
