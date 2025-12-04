@@ -73,3 +73,25 @@
 - [x] Add static file serving middleware
 - [ ] Test social media preview
 - [ ] Commit and deploy changes
+
+
+## README Consolidation
+- [ ] Review current README structure
+- [ ] Consolidate all essential information
+- [ ] Improve organization and readability
+- [ ] Commit updated README
+
+
+## Fix 502 Bad Gateway Error
+- [ ] Check Render deployment logs
+- [ ] Diagnose server crash cause
+- [ ] Fix database connection or environment variable issues
+- [ ] Test signup functionality
+- [ ] Redeploy and verify
+
+
+## Cleanup Extra Files
+- [ ] Delete README_OLD.md
+- [ ] Delete README_UPDATED.md
+- [ ] Delete RENDER_DEPLOYMENT.md (integrate into main README)
+- [ ] Keep only main README.md
