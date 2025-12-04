@@ -2,60 +2,93 @@
     <div class="hero-section">
         <div class="logo-section">
             <div class="logo-circle">
-                <svg width="100" height="100" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#FF6B35" stroke="#2C3E50" stroke-width="3"/>
-                    <circle cx="50" cy="50" r="25" fill="#FFA500"/>
-                    <path d="M 30 30 L 70 70 M 70 30 L 30 70" stroke="#2C3E50" stroke-width="2"/>
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <circle cx="60" cy="60" r="50" fill="url(#goldGradient)" filter="url(#glow)" opacity="0.9"/>
+                    <circle cx="60" cy="60" r="30" fill="#1a1a1a" stroke="#C0C0C0" stroke-width="2"/>
+                    <path d="M 40 40 L 80 80 M 80 40 L 40 80" stroke="url(#goldGradient)" stroke-width="3"/>
                 </svg>
             </div>
-            <h1>NBA POCKET</h1>
-            <p class="tagline">Your favorite NBA players, all in one place</p>
+            <h1 class="main-title">NBA POCKET</h1>
+            <p class="tagline">Premium Player Collection</p>
         </div>
 
         <div class="auth-section">
             <% if (user) { %>
-                <div class="welcome-message">
-                    <h2>Welcome back, <%= user.email %>!</h2>
+                <div class="welcome-card">
+                    <h2 class="welcome-title">Welcome Back</h2>
+                    <p class="user-email"><%= user.email %></p>
                     <div class="action-buttons">
-                        <a href="/users/profile" class="btn btn-primary">Go to Profile</a>
-                        <a href="/players/favorites" class="btn btn-secondary">View Favorites</a>
-                        <a href="/users/logout" class="btn btn-logout">Logout</a>
+                        <a href="/users/profile" class="btn btn-gold">
+                            <span>Profile</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 10L12 15L7 20" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+                        <a href="/players/favorites" class="btn btn-silver">
+                            <span>Favorites</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 10L12 15L7 20" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+                        <a href="/users/logout" class="btn btn-outline">Logout</a>
                     </div>
                 </div>
             <% } else { %>
-                <div class="auth-forms">
+                <div class="auth-card">
                     <div class="form-tabs">
-                        <button class="tab-btn active" onclick="showLogin()">Login</button>
-                        <button class="tab-btn" onclick="showSignup()">Sign Up</button>
+                        <button class="tab-btn active" onclick="showLogin()">
+                            <span>Login</span>
+                        </button>
+                        <button class="tab-btn" onclick="showSignup()">
+                            <span>Sign Up</span>
+                        </button>
                     </div>
 
                     <div id="login-form" class="auth-form active">
-                        <h2>Login to Your Account</h2>
+                        <h2 class="form-title">Access Your Collection</h2>
                         <form action="/users/login" method="POST">
                             <div class="form-group">
-                                <label for="login-email">Email</label>
-                                <input type="email" name="email" id="login-email" placeholder="Enter your email" required>
+                                <label for="login-email">Email Address</label>
+                                <input type="email" name="email" id="login-email" placeholder="your@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="login-password">Password</label>
-                                <input type="password" name="password" id="login-password" placeholder="Enter your password" required>
+                                <input type="password" name="password" id="login-password" placeholder="••••••••" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-gold btn-block">
+                                <span>Sign In</span>
+                            </button>
                         </form>
                     </div>
 
                     <div id="signup-form" class="auth-form">
-                        <h2>Create New Account</h2>
+                        <h2 class="form-title">Create Your Collection</h2>
                         <form action="/users" method="POST">
                             <div class="form-group">
-                                <label for="signup-email">Email</label>
-                                <input type="email" name="email" id="signup-email" placeholder="Enter your email" required>
+                                <label for="signup-email">Email Address</label>
+                                <input type="email" name="email" id="signup-email" placeholder="your@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="signup-password">Password</label>
-                                <input type="password" name="password" id="signup-password" placeholder="Create a password" required>
+                                <input type="password" name="password" id="signup-password" placeholder="••••••••" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                            <button type="submit" class="btn btn-gold btn-block">
+                                <span>Create Account</span>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -64,196 +97,310 @@
     </div>
 
     <div class="features-section">
-        <h2>Features</h2>
+        <h2 class="section-title">Premium Features</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <h3>🔍 Search Players</h3>
-                <p>Find any NBA player by name and view their stats</p>
+                <div class="feature-icon">🔍</div>
+                <h3>Search Players</h3>
+                <p>Discover and explore NBA players with advanced search</p>
             </div>
             <div class="feature-card">
-                <h3>⭐ Save Favorites</h3>
-                <p>Keep track of your favorite players in one place</p>
+                <div class="feature-icon">⭐</div>
+                <h3>Curate Collection</h3>
+                <p>Build your personal roster of favorite players</p>
             </div>
             <div class="feature-card">
-                <h3>📝 Add Notes</h3>
-                <p>Write and manage notes about your favorite players</p>
+                <div class="feature-icon">📝</div>
+                <h3>Add Insights</h3>
+                <p>Document notes and observations on each player</p>
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        color: #ffffff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 100vh;
+        line-height: 1.6;
+    }
+
     .home-container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 40px 20px;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .hero-section {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
         align-items: center;
-        gap: 40px;
-        margin-bottom: 60px;
-        flex-wrap: wrap;
+        margin-bottom: 100px;
+        min-height: 70vh;
     }
 
     .logo-section {
-        flex: 1;
         text-align: center;
-        min-width: 300px;
+        animation: slideInLeft 1s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
     }
 
     .logo-circle {
-        margin: 0 auto 20px;
+        margin: 0 auto 30px;
         width: 120px;
         height: 120px;
+        animation: float 3s ease-in-out infinite;
     }
 
-    .logo-section h1 {
-        font-size: 3em;
-        margin: 20px 0 10px;
-        color: #2C3E50;
-        letter-spacing: 2px;
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .main-title {
+        font-size: 4.5em;
+        font-weight: 900;
+        letter-spacing: 8px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 15px;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
     }
 
     .tagline {
-        font-size: 1.2em;
-        color: #7f8c8d;
-        margin-top: 10px;
+        font-size: 1.3em;
+        color: #C0C0C0;
+        font-weight: 300;
+        letter-spacing: 3px;
+        text-transform: uppercase;
     }
 
     .auth-section {
-        flex: 1;
-        min-width: 350px;
+        animation: slideInRight 1s ease-out;
     }
 
-    .auth-forms {
-        background: white;
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    .auth-card, .welcome-card {
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(192, 192, 192, 0.2);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                    0 0 0 1px rgba(255, 215, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .auth-card:hover, .welcome-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+                    0 0 0 1px rgba(255, 215, 0, 0.2);
     }
 
     .form-tabs {
         display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #e0e0e0;
+        gap: 0;
+        margin-bottom: 30px;
+        border-bottom: 2px solid rgba(192, 192, 192, 0.2);
     }
 
     .tab-btn {
         flex: 1;
-        padding: 12px;
-        background: none;
+        padding: 15px;
+        background: transparent;
         border: none;
         border-bottom: 3px solid transparent;
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
-        color: #7f8c8d;
-        transition: all 0.3s;
+        color: #808080;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .tab-btn span {
+        position: relative;
+        z-index: 1;
     }
 
     .tab-btn.active {
-        color: #FF6B35;
-        border-bottom-color: #FF6B35;
+        color: #FFD700;
+        border-bottom-color: #FFD700;
+    }
+
+    .tab-btn:hover:not(.active) {
+        color: #C0C0C0;
     }
 
     .auth-form {
         display: none;
+        animation: fadeInForm 0.5s ease-out;
     }
 
     .auth-form.active {
         display: block;
     }
 
-    .auth-form h2 {
-        margin-bottom: 20px;
-        color: #2C3E50;
-        font-size: 1.5em;
+    @keyframes fadeInForm {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .form-title, .welcome-title {
+        font-size: 1.8em;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+
+    .user-email {
+        color: #FFD700;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        font-weight: 500;
     }
 
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
     .form-group label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         font-weight: 600;
-        color: #2C3E50;
+        color: #C0C0C0;
+        font-size: 0.9em;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 
     .form-group input {
         width: 100%;
-        padding: 12px;
-        border: 2px solid #e0e0e0;
-        border-radius: 6px;
-        font-size: 14px;
-        transition: border-color 0.3s;
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 2px solid rgba(192, 192, 192, 0.2);
+        border-radius: 10px;
+        color: #ffffff;
+        font-size: 16px;
+        transition: all 0.3s ease;
     }
 
     .form-group input:focus {
         outline: none;
-        border-color: #FF6B35;
+        border-color: #FFD700;
+        background: rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .form-group input::placeholder {
+        color: #606060;
     }
 
     .btn {
-        padding: 12px 24px;
+        padding: 15px 30px;
         border: none;
-        border-radius: 6px;
+        border-radius: 10px;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
     }
 
-    .btn-primary {
-        background-color: #FF6B35;
-        color: white;
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
     }
 
-    .btn-primary:hover {
-        background-color: #e55a2b;
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
     }
 
-    .btn-secondary {
-        background-color: #3498db;
-        color: white;
+    .btn span, .btn svg {
+        position: relative;
+        z-index: 1;
     }
 
-    .btn-secondary:hover {
-        background-color: #2980b9;
+    .btn-gold {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #000000;
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
     }
 
-    .btn-logout {
-        background-color: #95a5a6;
-        color: white;
+    .btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
     }
 
-    .btn-logout:hover {
-        background-color: #7f8c8d;
+    .btn-silver {
+        background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%);
+        color: #000000;
+        box-shadow: 0 10px 30px rgba(192, 192, 192, 0.3);
+    }
+
+    .btn-silver:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(192, 192, 192, 0.4);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: #C0C0C0;
+        border: 2px solid rgba(192, 192, 192, 0.3);
+    }
+
+    .btn-outline:hover {
+        border-color: #FFD700;
+        color: #FFD700;
+        transform: translateY(-2px);
     }
 
     .btn-block {
         width: 100%;
-        display: block;
-    }
-
-    .welcome-message {
-        text-align: center;
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .welcome-message h2 {
-        color: #2C3E50;
-        margin-bottom: 30px;
+        display: flex;
     }
 
     .action-buttons {
@@ -263,70 +410,173 @@
     }
 
     .features-section {
-        margin-top: 60px;
         text-align: center;
+        animation: fadeInUp 1s ease-out 0.5s both;
     }
 
-    .features-section h2 {
-        font-size: 2em;
-        color: #2C3E50;
-        margin-bottom: 30px;
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+        font-size: 2.5em;
+        font-weight: 800;
+        margin-bottom: 60px;
+        color: #ffffff;
+        letter-spacing: 2px;
     }
 
     .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
-        margin-top: 30px;
     }
 
     .feature-card {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(192, 192, 192, 0.15);
+        border-radius: 15px;
+        padding: 40px 30px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #FFD700, #FFA500);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
     }
 
     .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        transform: translateY(-10px);
+        border-color: rgba(255, 215, 0, 0.3);
+        box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2);
+    }
+
+    .feature-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .feature-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        filter: grayscale(100%) brightness(1.5);
+        transition: filter 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+        filter: grayscale(0%) brightness(1);
     }
 
     .feature-card h3 {
-        color: #2C3E50;
+        font-size: 1.5em;
+        font-weight: 700;
         margin-bottom: 15px;
-        font-size: 1.3em;
+        color: #ffffff;
+        letter-spacing: 1px;
     }
 
     .feature-card p {
-        color: #7f8c8d;
-        line-height: 1.6;
+        color: #A0A0A0;
+        line-height: 1.8;
+        font-size: 1.05em;
+    }
+
+    @media (max-width: 1024px) {
+        .hero-section {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .main-title {
+            font-size: 3em;
+        }
     }
 
     @media (max-width: 768px) {
-        .hero-section {
-            flex-direction: column;
+        .main-title {
+            font-size: 2.5em;
+            letter-spacing: 4px;
         }
 
-        .logo-section h1 {
-            font-size: 2em;
+        .tagline {
+            font-size: 1em;
         }
+
+        .auth-card, .welcome-card {
+            padding: 30px 20px;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Smooth scroll */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Selection color */
+    ::selection {
+        background: rgba(255, 215, 0, 0.3);
+        color: #FFD700;
     }
 </style>
 
 <script>
     function showLogin() {
-        document.getElementById('login-form').classList.add('active');
-        document.getElementById('signup-form').classList.remove('active');
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const tabs = document.querySelectorAll('.tab-btn');
+        
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+        tabs[0].classList.add('active');
+        tabs[1].classList.remove('active');
     }
 
     function showSignup() {
-        document.getElementById('signup-form').classList.add('active');
-        document.getElementById('login-form').classList.remove('active');
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.querySelectorAll('.tab-btn')[0].classList.remove('active');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const tabs = document.querySelectorAll('.tab-btn');
+        
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+        tabs[1].classList.add('active');
+        tabs[0].classList.remove('active');
     }
+
+    // Add ripple effect to buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.btn');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    });
 </script>
