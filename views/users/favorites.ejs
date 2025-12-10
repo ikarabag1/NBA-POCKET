@@ -94,7 +94,18 @@
                         
                         <h3 class="player-name"><%= player.firstname %> <%= player.lastname %></h3>
                         
+                        <% if (player.team) { %>
+                        <p class="player-team"><%= player.team %></p>
+                        <% } %>
+                        
                         <div class="player-stats">
+                            <% if (player.position) { %>
+                            <div class="stat-item">
+                                <span class="stat-label">Position</span>
+                                <span class="stat-value"><%= player.position %></span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <% } %>
                             <div class="stat-item">
                                 <span class="stat-label">Height</span>
                                 <span class="stat-value"><%= player.height || 'N/A' %></span>
@@ -104,7 +115,28 @@
                                 <span class="stat-label">Weight</span>
                                 <span class="stat-value"><%= player.weight ? player.weight + ' lbs' : 'N/A' %></span>
                             </div>
+                            <% if (player.jersey_number) { %>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-label">Jersey</span>
+                                <span class="stat-value">#<%= player.jersey_number %></span>
+                            </div>
+                            <% } %>
                         </div>
+                        
+                        <% if (player.college || player.country || player.draft_year) { %>
+                        <div class="player-info">
+                            <% if (player.college) { %>
+                            <p class="info-item">🎓 <%= player.college %></p>
+                            <% } %>
+                            <% if (player.country) { %>
+                            <p class="info-item">🌍 <%= player.country %></p>
+                            <% } %>
+                            <% if (player.draft_year) { %>
+                            <p class="info-item">📅 Draft <%= player.draft_year %> (Rd <%= player.draft_round || '?' %>, #<%= player.draft_number || '?' %>)</p>
+                            <% } %>
+                        </div>
+                        <% } %>
                     </div>
                 <% }); %>
             </div>

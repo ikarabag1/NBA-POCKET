@@ -21,8 +21,16 @@ module.exports = (sequelize, DataTypes) => {
   player.init({
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
-    height: DataTypes.DECIMAL,
-    weight: DataTypes.DECIMAL
+    height: DataTypes.STRING,
+    weight: DataTypes.STRING,
+    position: DataTypes.STRING,
+    team: DataTypes.STRING,
+    jersey_number: DataTypes.STRING,
+    college: DataTypes.STRING,
+    country: DataTypes.STRING,
+    draft_year: DataTypes.INTEGER,
+    draft_round: DataTypes.INTEGER,
+    draft_number: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'player',

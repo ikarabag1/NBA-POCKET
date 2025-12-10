@@ -24,19 +24,36 @@ router.get('/', async (req, res) => {
             const response = await axios.request(options)
             const playerData = response.data.data // BALLDONTLIE returns data in 'data' field
             
+            // Get user's favorites if logged in
+            let userFavorites = []
+            if (res.locals.user) {
+                const userWithPlayers = await db.user.findOne({
+                    where: { id: res.locals.user.id },
+                    include: [db.player]
+                })
+                if (userWithPlayers && userWithPlayers.players) {
+                    userFavorites = userWithPlayers.players.map(p => 
+                        `${p.firstname.toLowerCase()}_${p.lastname.toLowerCase()}`
+                    )
+                }
+            }
+            
             res.render('users/display.ejs', {
-                playerData
+                playerData,
+                userFavorites
             })
         } catch (error) {
             console.error('API Error:', error.message)
             res.render('users/display.ejs', {
                 playerData: null,
+                userFavorites: [],
                 error: 'Failed to fetch player data. Please check your API key.'
             })
         }
     } else {
         res.render('users/display.ejs', {
-            playerData: null
+            playerData: null,
+            userFavorites: []
         })
     }
 })
@@ -85,7 +102,14 @@ router.post('/favorites', async (req, res) => {
                 defaults: {
                     height: req.body.height || null,
                     weight: req.body.weight || null,
-                    age: req.body.age || null
+                    position: req.body.position || null,
+                    team: req.body.team || null,
+                    jersey_number: req.body.jersey_number || null,
+                    college: req.body.college || null,
+                    country: req.body.country || null,
+                    draft_year: req.body.draft_year || null,
+                    draft_round: req.body.draft_round || null,
+                    draft_number: req.body.draft_number || null
                 }
             })
             

@@ -249,5 +249,27 @@
 - [x] Investigate the issue with adding players to favorites
 - [x] Check player controller and routes
 - [x] Fix the add to collection functionality - added user variable to favorites route
-- [ ] Deploy fix to production
+- [x] Deploy fix to production (multiple attempts)
+- [ ] 404 error persists after POST - Render deployment or caching issue
+- [ ] Need to investigate POST route specifically
+
+
+## Fix Database Schema and Add Player Stats
+- [x] Change height/weight columns from numeric to string type
+- [x] Add player statistics fields (position, team, jersey_number, college, country, draft info)
+- [x] Create migration to alter columns and add new fields
+- [x] Update player model with new fields
+- [x] Update controllers to save and display stats
+- [x] Update views to show player statistics
+- [ ] Run migration on production database
+- [ ] Test add to collection with all player data
+- [ ] Verify fix works on live site
+
+
+## Remove Add Button for Already Favorited Players
+- [x] Check if player is already in user's favorites when displaying search results
+- [x] Hide or replace "ADD TO COLLECTION" button for favorited players
+- [x] Show "ALREADY IN COLLECTION" message for favorited players
+- [x] Update controller to pass user's favorites to display view
+- [ ] Deploy to production
 - [ ] Test on live site
